@@ -41,6 +41,7 @@
 #container-modal-content
 {
 	display: block;
+	min-height: 200px;
 	width: 800px;
 	margin: 2px auto 0px;
 	text-align: center;
@@ -59,3 +60,41 @@
 {
 	width: 30% !important;
 }
+.divClass2
+{
+	width: 395px;
+	display: inline-block;
+	height: 60px;
+	float: left;
+}
+.divClass4
+{
+	width: 800px;
+	display: inline-block;
+	height: 60px;
+	float: left;
+}
+.divClass2 div
+{
+	max-width: 150px;
+	width: 150px;
+	min-width: 150px; 
+	display: inline-block !important;
+}
+.inp-modal
+{
+	text-transform: capitalize;
+	width: 230px;
+	max-width: 230px;
+	min-width: 230px;
+	height: 25px;
+	color: black;
+	border: none;
+	border-bottom: 1px solid black;
+	outline: none;
+	font-size: 12pt;
+	margin: 0px 0px 5px;
+	font-family: futura;
+	display: inline-block;
+}
+

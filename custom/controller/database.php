@@ -4,6 +4,6 @@ class database
 	public $server = "localhost";
 	public $user = "root";
 	public $pass = "";
-	public $database = "colegios";
+	public $database = "pioGroup";
 }
 ?>

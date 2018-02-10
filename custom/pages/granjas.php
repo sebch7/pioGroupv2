@@ -10,7 +10,7 @@
   <script>
   $(function() 
   {
-    mostrarTablaEmpresas();
+    mostrarTablaGranjas();
   });
   	
   </script>
@@ -22,25 +22,25 @@
 	
 	<div id="container">
 		<div id="container-central">
-			<h1 id="nombreModulo">Administrar Empresas - <?php echo $_SESSION['nombreEmpresa'] ?></h1>
+			<h1 id="nombreModulo">Administrar Granjas - <?php echo $_SESSION['nombreEmpresa'] ?></h1>
 		<div id="msg">
 			<?php
 				if(isset($_GET['msg']))
 				{
 					switch ($_GET['msg']) {
 						case 'CR':
-							echo $mensaje = 'La empresa ha sido creada.';
+							echo $mensaje = 'La granja ha sido creada.';
 						break;
 
 						case 'DP':
-							echo $mensaje = 'La empresa ya se encuentra registrada.';
+							echo $mensaje = 'La granja ya se encuentra registrada.';
 						break;	
 					}
 				}
 			?>
 		</div>
 			<div id="actionMenu">
-				<button class="btn success agregar" id="nuevaEmpresa"><i class="material-icons">add</i></button>
+				<button class="btn success agregar" id="nuevaGranja"><i class="material-icons">add</i></button>
 			</div>
 			<table id="tablaInfo">
 				<thead id="tablaInfoHead"></thead>

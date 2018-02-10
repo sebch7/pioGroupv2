@@ -1,4 +1,4 @@
-</**
+/**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,49 +18,28 @@ body {
   margin: 0;
 }
 
-.mdl-dialog__title
-{
-  padding: 24px 24px 24px 24px !important;
-}
-
-.mdl-dialog__content
-{
-  padding: 0px 5px;
-}
-.btn-primary
-{
-  background: #A33A2C;
-  color: white;
-}
-
-.btn-primary:hover
-{
-  color: white !important;
-  background: #A33A2C !important;
-}
 /* Disable ugly boxes around images in IE10 */
 a img{
   border: 0px;
 }
 
 ::-moz-selection {
-  background-color: #b11600;
+  background-color: #6ab344;
   color: #fff;
 }
 
 ::selection {
-  background-color: #b11600;
+  background-color: #6ab344;
   color: #fff;
 }
 
 .android-search-box .mdl-textfield__input {
   color: rgba(0, 0, 0, 0.87);
 }
-
 .android-header
 {
-  border-bottom: 2px solid #8C2D35 !important;
-  background: #8C2D35 !important;
+  border-bottom: 2px solid #cc8c1b !important;
+  background: #cc8c1b !important;
   color: white !important;
 }
 
@@ -363,7 +342,7 @@ a img{
 
 .android-link {
   text-decoration: none;
-  color: #8C2D35 !important;
+  color: #cc8c1b !important;
 }
 
   .android-link:hover {
@@ -413,15 +392,15 @@ a img{
 }
 
 .android-more-section {
-  padding: 0px 0px 80px;
+  padding: 20px 0px 80px;
   max-width: 1044px;
   margin-left: auto;
   margin-right: auto;
 }
 
   .android-more-section .android-section-title {
-    //margin-left: 12px;
-    display: block;
+    margin-left: 12px;
+    padding-bottom: 24px;
   }
 
 .android-card-container {

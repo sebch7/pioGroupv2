@@ -10,7 +10,10 @@
   <script>
   $(function() 
   {
-    mostrarContainerCursos();
+    mostrarTablaEmpresas();
+
+    mostrarContainerGranjas();
+
   });
     
   </script>
@@ -19,12 +22,24 @@
         include('headerBody.php');
       ?>
         <div class="android-more-section">
-          <!-- Inicio tarjeta -->
-          <div class="android-section-title mdl-typography--display-4">BIENVENIDO,</div>
-          <div class="android-section-title mdl-typography--display-2-color-contrast">en esta plataforma cuentas con diferentes secciones para que tengas un control mas simple sobre tu colegio.</div>
-          <!--<div id="containerGranjas" class="android-card-container mdl-grid">-->
-          </div>
+          <div class="android-section-title mdl-typography--display-1-color-contrast">Granjas</div>
+          <div id="containerGranjas" class="android-card-container mdl-grid">
           <!-- fin tarjeta -->
+            
+          <!-- fin tarjeta -->
+          </div>
+          <div class="android-section-title mdl-typography--display-1-color-contrast">Galpones</div>
+          <div id="containerGalpones" class="android-card-container mdl-grid">
+          <!-- fin tarjeta -->
+            
+          <!-- fin tarjeta -->
+          </div>
+          <div class="android-section-title mdl-typography--display-1-color-contrast">Insumos</div>
+          <div id="containerInsumos" class="android-card-container mdl-grid">
+          <!-- fin tarjeta -->
+            
+          <!-- fin tarjeta -->
+          </div>  
     <?php
       include('footer.php');
     ?>

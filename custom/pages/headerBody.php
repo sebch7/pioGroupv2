@@ -1,44 +1,23 @@
 <body>
-<<<<<<< HEAD
-    <dialog class="mdl-dialog">
-        
-        <div id="dialog-content">
-       
-        </div>
-      </dialog>
-		<!--<dialog class="mdl-dialog">
-			<h4 id="container-modal-title" class="mdl-dialog__title"></h4>
-			<div class="mdl-dialog__content" id="container-modal-content">
-			  
+	<div id="modal">
+		<div id="container-modal">
+			<div id="container-modal-title">
+				<h2></h2>
 			</div>
-			<div class="mdl-dialog__actions">
-			  <button type="button" class="mdl-button close">Cerrar</button>
+			<div id="container-modal-content">
+
 			</div>
-		</dialog>-->
-=======
-		<dialog class="mdl-dialog">
-      
-      <div id="dialog-content">
-     
-      </div>
-		</dialog>
-      <!--<h4 id="container-modal-title" class="mdl-dialog__title"></h4>
-      <div class="mdl-dialog__content" id="container-modal-content">
-        
-      </div>
-      <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button">Aceptar</button>
-        <button type="button" class="mdl-button close">Cerrar</button>
-      </div>-->
->>>>>>> e2536ef2cf20fb1624212151dc01c596b7d259b3
-
-
+			<div id="container-modal-footer" class="divClass4">
+				<div class="divClass4"><button type="button" id="btn-cancel-modal" class="btn-modal danger btn">Cancelar</button></div>
+			</div>
+		</div>
+	</div>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
       <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
           <span class="android-title mdl-layout-title">
-            <img style="width:200px" src="../img/logoHeader.png">
+            <img class="android-logo-image" src="../img/logoHeader.png">
           </span>
           <!-- Add spacer, to align navigation to the right in desktop -->
           <div class="android-header-spacer mdl-layout-spacer"></div>
@@ -54,8 +33,7 @@
 
       <div class="android-drawer mdl-layout__drawer">
         <nav id="menuPrincipal" class="mdl-navigation">
-            
+          
         </nav>
       </div>
       <div class="android-content mdl-layout__content">
-        

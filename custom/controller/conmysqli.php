@@ -56,13 +56,6 @@ class conmysqli
 		return $this->sql;
 	}
 
-	public function mostrarInsertar($tabla,$campos,$valores)
-	{
-		$this->sql= 'INSERT INTO '.$tabla.' ('.$campos.') VALUES ('.$valores.');';
-		//$this->consulta = mysqli_query($this->conexion, $this->sql);
-		echo $this->sql;
-	}
-
 	public function editar($tabla,$campos,$condicion)
 	{
 		if($condicion==null||$condicion=="")
@@ -77,37 +70,8 @@ class conmysqli
 		}
 	}
 
-	public function eliminar($tabla,$condicion)
-	{
-		if($condicion==null||$condicion=="")
-		{
-			return 'Error';
-		}
-		else
-		{
-			$this->sql= 'DELETE FROM '.$tabla.'  WHERE '.$condicion.';';
-			$this->consulta = mysqli_query($this->conexion, $this->sql);
-			//return $this->sql;
-		}
-	}
-
-	public function mostrarEditar($tabla,$campos,$condicion)
-	{
-		if($condicion==null||$condicion=="")
-		{
-			return 'Error';
-		}
-		else
-		{
-			$this->sql= 'UPDATE '.$tabla.' SET '.$campos.' WHERE '.$condicion.';';
-			//$this->consulta = mysqli_query($this->conexion, $this->sql);
-			echo $this->sql;
-		}
-	}
-
 	public function iniciarSesion($user,$password)
 	{
-		$password = md5($password);
 		$consulta = $this->consulta('Usuario.idPerfil,Usuario.intentos','Usuario INNER JOIN Empleado ON Usuario.idEmpleado = Empleado.identificacion','idEmpleado = '.$user.' AND idEstado = 1');
 		$this->resultado = mysqli_fetch_assoc($consulta);
 		
@@ -137,7 +101,7 @@ class conmysqli
 					$this->editar('Usuario','intentos = 0,ultimoLogin = "'.date('Y-m-d h:m:s').'"','idEmpleado = '.$user);
 					$_SESSION['idPerfil'] = $this->resultado['idPerfil'];
 
-					$this->mostrarConsulta('CONCAT(Empleado.primerNombre," ",Empleado.primerApellido) as empleado,Empleado.identificacion as usuario,Usuario.idPerfil as idPerfil,Perfil.nombre as perfil,Empleado.idEmpresa as Empresa,Empresa.nombre as nombreEmpresa,Usuario.contrasena as contrasena','Empleado INNER JOIN Usuario ON Usuario.idEmpleado = Empleado.identificacion INNER JOIN Perfil ON Perfil.id = Usuario.idPerfil INNER JOIN Empresa ON Empresa.id = Empleado.idEmpresa','Empleado.identificacion = '.$user);
+					$this->consulta('CONCAT(Empleado.primerNombre," ",Empleado.primerApellido) as empleado,Empleado.identificacion as usuario,Usuario.idPerfil as idPerfil,Perfil.nombre as perfil,Empleado.idEmpresa as Empresa,Empresa.nombre as nombreEmpresa,Usuario.contrasena as contrasena','Empleado INNER JOIN Usuario ON Usuario.idEmpleado = Empleado.identificacion INNER JOIN Perfil ON Perfil.id = Usuario.idPerfil INNER JOIN Empresa ON Empresa.id = Empleado.idEmpresa','Empleado.identificacion = '.$user.';');
 					$this->resultado = mysqli_query($this->conexion,$this->sql) or die(mysqli_error($this->conexion));
 					$this->resultado = mysqli_fetch_assoc($this->resultado);
 

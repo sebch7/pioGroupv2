@@ -14,9 +14,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<link rel="icon" type="image/png" href="img/icon.png">
-	<title>Colegios</title>
+	<title>Pio Group</title>
 	<link rel="stylesheet" type="text/css" href="css/styleLogin.css">
 	<link rel="stylesheet" type="text/css" href="css/modal.css">
 	<meta charset="UTF-8">
@@ -31,7 +30,7 @@
 </div>
 <div id="container">
 	<div id="container-central">
-		<p>Bienvenido,<br>Inicia sesión para administrar tu colegio.</p>
+		<p>Bienvenido,<br>Inicia sesión para administrar tu empresa.</p>
 		<div id="tarjeta">
 				<div id="titulo_tarjeta">
 					<div id="header-logo">

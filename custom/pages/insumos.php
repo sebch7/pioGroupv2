@@ -10,9 +10,8 @@
   <script>
   $(function() 
   {
-    mostrarTablaEmpresas();
+    mostrarTablaInsumos();
   });
-  	
   </script>
 </head>
 <body>
@@ -22,25 +21,21 @@
 	
 	<div id="container">
 		<div id="container-central">
-			<h1 id="nombreModulo">Administrar Empresas - <?php echo $_SESSION['nombreEmpresa'] ?></h1>
+			<h1 id="nombreModulo">Administrar Insumos - <?php echo $_SESSION['nombreEmpresa'] ?></h1>
 		<div id="msg">
 			<?php
 				if(isset($_GET['msg']))
 				{
 					switch ($_GET['msg']) {
 						case 'CR':
-							echo $mensaje = 'La empresa ha sido creada.';
+							echo $mensaje = 'Nuevo insumo registrado correctamente.';
 						break;
-
-						case 'DP':
-							echo $mensaje = 'La empresa ya se encuentra registrada.';
-						break;	
 					}
 				}
 			?>
 		</div>
 			<div id="actionMenu">
-				<button class="btn success agregar" id="nuevaEmpresa"><i class="material-icons">add</i></button>
+				<button class="btn success agregar" id="nuevoInsumo"><i class="material-icons">add</i></button>
 			</div>
 			<table id="tablaInfo">
 				<thead id="tablaInfoHead"></thead>
@@ -51,5 +46,6 @@
 	<?php
 		include('footer.php');
 	?>
+</footer>
 </body>
 </html>

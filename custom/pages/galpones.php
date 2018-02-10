@@ -10,7 +10,7 @@
   <script>
   $(function() 
   {
-    mostrarTablaEmpresas();
+    mostrarTablaGalpones();
   });
   	
   </script>
@@ -19,28 +19,27 @@
 	<?php
 		include('headerBody.php');
 	?>
-	
 	<div id="container">
 		<div id="container-central">
-			<h1 id="nombreModulo">Administrar Empresas - <?php echo $_SESSION['nombreEmpresa'] ?></h1>
+			<h1 id="nombreModulo">Administrar Galpones - <?php echo $_SESSION['nombreEmpresa'] ?></h1>
 		<div id="msg">
 			<?php
 				if(isset($_GET['msg']))
 				{
 					switch ($_GET['msg']) {
 						case 'CR':
-							echo $mensaje = 'La empresa ha sido creada.';
+							echo $mensaje = 'El gapon ha sido creado.';
 						break;
 
 						case 'DP':
-							echo $mensaje = 'La empresa ya se encuentra registrada.';
+							echo $mensaje = 'El galpon ya se encuentra registrado.';
 						break;	
 					}
 				}
 			?>
 		</div>
 			<div id="actionMenu">
-				<button class="btn success agregar" id="nuevaEmpresa"><i class="material-icons">add</i></button>
+				<button class="btn success agregar" id="nuevoGalpon"><i class="material-icons">add</i></button>
 			</div>
 			<table id="tablaInfo">
 				<thead id="tablaInfoHead"></thead>

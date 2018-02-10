@@ -47,7 +47,7 @@ header
 	width: 100%;
 	max-width: 2000px;
 	margin: 0;
-	background: #8C2D35;
+	background: #cc8c1b;
 	overflow: hidden;
 }
 #container
@@ -166,6 +166,7 @@ footer
 }
 .inp
 {
+	text-transform: capitalize;
 	width: 80%;
 	height: 30px;
 	color: black;
@@ -179,7 +180,7 @@ footer
 }
 .inp:focus
 {
-	border-bottom: 2px solid #8C2D35;
+	border-bottom: 2px solid #cc8c1b;
 	color: #b11600;
 }
 .btn
@@ -204,8 +205,8 @@ footer
 }
 .success:hover 
 {
-	border: 2px solid #8C2D35;
-	color: #8C2D35;
+	border: 2px solid #cc8c1b;
+	color: #cc8c1b;
 }
 
 .danger:hover 

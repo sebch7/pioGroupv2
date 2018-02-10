@@ -5,9 +5,10 @@
 	$database = new database();
 	$conmysqli = new conmysqli($database->server,$database->user,$database->pass,$database->database);
 
-	echo $login = $conmysqli->iniciarSesion($_POST['user'], $_POST['password']);
+	$login = $conmysqli->iniciarSesion($_POST['user'], $_POST['password']);
 
-	
+	echo $login;
+
 	switch ($login) {
 		case 'IN':
 			// remove all session variables
@@ -46,6 +47,5 @@
 			header('location:index.php');
 		break;
 	}
-	
 
 ?>
