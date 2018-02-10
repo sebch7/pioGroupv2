@@ -1,8 +1,11 @@
 var dataGlobalUrl = [];
 $('document').ready(function()
 {
-	lectorUrl();
+	$(document).ready(function(){
+	    $('#example').DataTable();
+	});
 
+	lectorUrl();
 
 	$('#btn-menu').click(function()
 	{
@@ -31,6 +34,17 @@ $('document').ready(function()
 		var formulario = 'new_user';
 		$('#container-modal-title').html('<h2>Nuevo Usuario</h2>');
 		formNuevo(titulo,campo,formulario);
+
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevoUsuario');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
 	});
 
 	$('#nuevoUsuarioEmpresa').click(function()
@@ -40,15 +54,37 @@ $('document').ready(function()
 		var formulario = 'new_userCompany';
 		$('#container-modal-title').html('<h2>Nuevo Usuario-Empresa</h2>');
 		formNuevo(titulo,campo,formulario);
+
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevoUsuarioEmpresa');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
 	});
 
 	$('#nuevaEmpresa').click(function()
 	{
-		var titulo = ['Nombre','Nit','Persona responsable','Teléfono Responsable','Pais','Departamento','Ciudad','Plan Comercial','Estado'];
-		var campo = ['r_nombre','r_nit','r_personaResponsable','r_telefono','rs_idPais','rs_idDepartamento','rs_idCiudad','rs_idPlanComercial','rs_idEstado'];
+		var titulo = ['Nombre','Nit','Persona responsable','Teléfono Responsable','Departamento','Ciudad','Plan Comercial'];
+		var campo = ['r_nombre','r_nit','r_personaResponsable','r_telefono','rs_idDepartamento','rs_idCiudad','rs_idPlanComercial'];
 		var formulario = 'new_company';
 		$('#container-modal-title').html('<h2>Nueva Empresa</h2>');
 		formNuevo(titulo,campo,formulario);
+
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevaEmpresa');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
 	});
 
 	$('#nuevaGranja').click(function()
@@ -58,6 +94,17 @@ $('document').ready(function()
 		var formulario = 'new_farm';
 		$('#container-modal-title').html('<h2>Nueva Granja</h2>');
 		formNuevo(titulo,campo,formulario);
+
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevaGranja');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
 	});
 
 	$('#nuevoGalpon').click(function()
@@ -67,6 +114,17 @@ $('document').ready(function()
 		var formulario = 'new_galpon';
 		$('#container-modal-title').html('<h2>Nuevo Galpon</h2>');
 		formNuevo(titulo,campo,formulario);
+
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevoGalpon');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
 	});
 
 	$('#nuevoInsumo').click(function()
@@ -76,6 +134,17 @@ $('document').ready(function()
 		var formulario = 'new_supply';
 		$('#container-modal-title').html('<h2>Nuevo Insumo</h2>');
 		formNuevo(titulo,campo,formulario);
+
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevoInsumo');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
 	});
 
 	$('#nuevoInsumoGalpon').click(function()
@@ -85,13 +154,19 @@ $('document').ready(function()
 		var formulario = 'new_supplyGalpon';
 		$('#container-modal-title').html('<h2>Nuevo Insumo a Galpon</h2>');
 		formNuevo(titulo,campo,formulario);
-	});
-	
 
-	$('#btn-cancel-modal').click(function()
-		{
-			$('#modal').slideUp();
-		});
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevoInsumoGalpon');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
+	});
+
 
 });
 
@@ -730,6 +805,62 @@ $('document').ready(function()
 
 	function mostrarTablaEmpresas()
 	{
+		var table =  $('#example').DataTable(
+		{
+		  "ajax": {
+		      "url": "../controller/services/select.php?accion=consultaEmpresas",
+		      "dataSrc": ""
+		  },
+		  "initComplete": function () {
+        var api = this.api();
+        api.$('.busqueda').click( function () {
+            api.search( this.innerHTML ).draw();
+        } );
+    	},
+		  "columns": [
+					{"data": "nombre"},
+					{"data": "ciudad", "class": "busqueda"},
+					{"data": "responsable"},
+					{"data": "telefono"},
+		      {"data": "planComercial", "class": "busqueda" },
+		      {"data": "estado", "class": "busqueda" },
+		  	],
+		  	
+		  	"columnDefs": [
+        {
+            "targets": 6,
+            "data": "id",
+            "render": function(data) {
+              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+            },
+        }],
+        
+		  	"language": {
+		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+		  },
+		  stateSave: true
+		});
+
+		$('#example tbody').on( 'click', 'span', function () {
+		  var dialog = document.querySelector('dialog');
+			formEditarEmpresa($(this).data('emco'));
+			dialogPolyfill.registerDialog(dialog);
+			dialog.showModal();
+			var showDialogButton = document.querySelector('span');
+			if (dialog.showModal) {
+			  dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+			  dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+			  dialog.close();
+			});
+		});
+	}
+	/*
+	function mostrarTablaEmpresas()
+	{
 		$('#tablaInfoHead').html('');
 		$('#tablaInfoBody').html('');
 
@@ -783,6 +914,7 @@ $('document').ready(function()
 	    	
 	  });
 	}
+	*/
 
 	function mostrarTablaGranjas()
 	{
@@ -1076,26 +1208,24 @@ $('document').ready(function()
 
 	function formNuevo(titulo,campos,formulario)
 	{
-		//$('#container-modal-title').html('<h2>'+accionFormulario(formulario)+'</h2>');
-
 		$('#container-modal-content').html('');
 		pintarForm = '';
-		pintarForm += '<form method="post" action="controller/'+formulario+'.php">';
+		pintarForm += '<form method="post" action="controller/'+formulario+'.php" class="formSection">';
 		for(var i = 0; i< titulo.length;i++)
 		{
 			var data = campos[i].split('_');//separar tipo de nombre
 			var type = data[0];//tipo de campo
 			var campo =data[1];//nombre del campo
  
-			//pintarForm += '<div class="divClass2">';
+			pintarForm += '<div class="sectionForm">';
 
-			if(type == 'r' || type == 'rs' || type == 'rn')
+			if(type == 'r' || type == 'rs' || type == 'rn' || type == 're')
 			{
-				pintarForm += '<div>'+titulo[i]+'*</div>';
+				pintarForm += '<div class="titulo">'+titulo[i]+'*</div>';
 			}
 			else
 			{
-				pintarForm += '<div>'+titulo[i]+'</div>';	
+				pintarForm += '<div class="titulo">'+titulo[i]+'</div>';	
 			}
 			switch(type)
 			{
@@ -1103,7 +1233,7 @@ $('document').ready(function()
 					//pintarForm += '<input class="mdl-textfield__input" type="input" id="'+campo+'" name="'+campo+'">';
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="input" id="'+campo+'" name="'+campo+'">';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 's':
@@ -1114,13 +1244,13 @@ $('document').ready(function()
 				case 'n':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="number" id="'+campo+'" name="'+campo+'">';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 'd':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="date" id="'+campo+'" name="'+campo+'">';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				//datos obligatorios
@@ -1133,61 +1263,67 @@ $('document').ready(function()
 				case 'rn':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="number" id="'+campo+'" name="'+campo+'" min="0" required>';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 'r':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="text" id="'+campo+'" name="'+campo+'" required>';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					  pintarForm += '</div>';
+				break;
+				case 'ro':
+					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
+					    pintarForm += '<input class="mdl-textfield__input" type="text" id="'+campo+'" name="'+campo+'" readOnly="readOnly">';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 'rd':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="date" id="'+campo+'" name="'+campo+'" required>';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 'rh':
-					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="hidden" id="'+campo+'" name="'+campo+'" required>';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
-					  pintarForm += '</div>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 				break;
 				case 're':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="mail" id="'+campo+'" name="'+campo+'" required>';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 'l':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
-					    pintarForm += '<input class="mdl-textfield__input" type="number" id="'+campo+'" name="'+campo+'" disabled="disabled">';
-					    pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					    pintarForm += '<input class="mdl-textfield__input" type="text" id="'+campo+'" name="'+campo+'" disabled="disabled">';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 'ls':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
-						pintarForm += '<select class="mdl-textfield__input" id="'+campo+'" name="'+campo+'" disabled="disabled"><</select>';
+						pintarForm += '<select class="mdl-textfield__input" id="'+campo+'" name="'+campo+'" disabled="disabled"></select>';
 				  	pintarForm += '</div>';
 				break;
 				default:
 
 				break;
 			}
-			//pintarForm += '</div>';
+			pintarForm += '</div>';	
 		}
+			ContentModal = '<h4 id="container-modal-title" class="mdl-dialog__title">'+accionFormulario(formulario)+'</h4>';
+			ContentModal += '<form method="post" action="controller/'+formulario+'.php" class="formSection">';
+			ContentModal += '<div class="mdl-dialog__content" id="container-modal-content" class="formSection">';
+				ContentModal += pintarForm;
+			ContentModal += '</div>';
+			ContentModal += '<div class="mdl-dialog__actions">';
+        ContentModal += '<button type="submit" class="mdl-button btn-primary">Aceptar</button>';
+      ContentModal += '</form>';  
+			  ContentModal += '<button type="button" class="mdl-button close">Cerrar</button>';
+			ContentModal += '</div>';
 
-		pintarForm += '<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn-new-user" type="submit">'+accionFormulario(formulario)+'</button>';
-	  
-	
-		pintarForm += '</form>';
-
-		$('#container-modal-content').html(pintarForm);
-		
+			$('#dialog-content').html(ContentModal);		
 		cargarFunciones();
-		
-		$('#modal').slideDown();
 	}
 
 	function cargarFunciones()
@@ -1283,30 +1419,6 @@ $('document').ready(function()
 			$('#idEmpresa').val(data[0].idEmpresa);
 			$('#idCiudad').val(data[0].idCiudad);
 			$('#idGranja').val(data[0].idGranja);
-		})
-		.fail(function(data) {
-	    
-	  })
-	  	.always(function() {
-	    	
-	  });
-	}
-
-	function menuPrincipal()
-	{
-		$('#menuPrincipal').html('');
-		datosMenuPrincipal = '';
-		$.ajax({
-		  method: "POST",
-		  dataType: 'json',
-		  url: "../controller/services/select.php",
-		  data: {accion: 'cargarMenu'}
-		}).done(function(data) {
-	    for(var i = 0; i < data.length; i++)
-	    {
-	    	datosMenuPrincipal = '<a class="mdl-navigation__link" href="">Phones</a>';
-	    }
-	    $('#menuPrincipal').html(datosMenuPrincipal);
 		})
 		.fail(function(data) {
 	    

@@ -1,17 +1,10 @@
 <body>
-	<div id="modal">
-		<div id="container-modal">
-			<div id="container-modal-title">
-				<h2></h2>
-			</div>
-			<div id="container-modal-content">
-
-			</div>
-			<div id="container-modal-footer" class="divClass4">
-				<div class="divClass4"><button type="button" id="btn-cancel-modal" class="btn-modal danger btn">Cancelar</button></div>
-			</div>
-		</div>
-	</div>
+  
+	<dialog class="mdl-dialog">
+    <div id="dialog-content">
+    </div>
+  </dialog>
+    
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
       <div class="android-header mdl-layout__header mdl-layout__header--waterfall">

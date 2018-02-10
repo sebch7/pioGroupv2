@@ -2,7 +2,7 @@
 	
 	require_once('../../start.php');
 
-	switch ($_POST['accion']) {
+	switch ($_REQUEST['accion']) {
 
 		case 'consultaUsuriosEmpresas':
 
