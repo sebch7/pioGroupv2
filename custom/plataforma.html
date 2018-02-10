@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="image/png" href="img/icon.png">
+	<title>Colegios</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+  <script>
+  $( function() {
+    $("#draggable").draggable();
+  } );
+  </script>
+</head>
+<body>
+
+	<div id="menuFlotante">
+		<ul type="none">
+			<li class="itemMenuFlotante" data-info="empresas">Empresas</li>
+			<li class="itemMenuFlotante" data-info="empleados">Empleados</li>
+			<li class="itemMenuFlotante" data-info="granjas">Granjas</li>
+			<li class="itemMenuFlotante" data-info="galpones">Galpones</li>
+			<!--<li class="itemMenuFlotante" data-info="insumos">Insumos</li>-->
+			<hr>
+			<li class="">Mensajes</li>
+			<li class="">Configuración</li>
+			<a href="index.html"><li class="">Cerrar Sesión</li></a>
+		</ul>
+	</div>
+	
+</div>
+	<header>
+		<div id="header-logo">
+			<img id="header-logo-img" src="img/logo.png">
+		</div>
+	</header>
+	
+	<div id="container">
+		<div id="container-central">
+			<h1 id="nombreModulo"></h1>
+			<table id="tablaInfo">
+				<thead id="tablaInfoHead"></thead>
+				<tbody id="tablaInfoBody"></tbody>
+			</table>
+		</div>
+	</div>
+	<div id="draggable" class="ui-widget-content">
+  		<button type="button" id="btn-menu"></button>
+	</div>
+	<footer>
+	<a href="acercade.html"><small class="left">Acerca de Pio Group ®</small></a>
+	<a href="Privacidad.html"><small class="left">Privacidad</small></a>
+	<a href="ayuda.html"><small class="left">Ayuda</small></a>
+	<br>
+	<small>© Todos los derechos reservados 2017</small>
+</footer>
+</body>
+</html>
