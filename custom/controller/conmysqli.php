@@ -36,17 +36,16 @@ class conmysqli
 	{
 		$this->sql='SELECT '.$campos.' FROM '.$tabla.' WHERE '.$condicion.';';
 		$this->resultado = mysqli_query($this->conexion, $this->sql);
-
  		return $this->resultado;
+ 		//mysqli_free_result($this->resultado);
+ 		//mysqli_close($this->conexion);
 	}
 
 	public function mostrarConsulta($campos,$tabla,$condicion)
 	{
 		$this->sql='SELECT '.$campos.' FROM '.$tabla.' WHERE '.$condicion.';';
-		$this->resultado = mysqli_query($this->conexion, $this->sql);
-
+		//$this->resultado = mysqli_query($this->conexion, $this->sql);
  		echo $this->sql;
- 		return $this->resultado;
 	}
 
 	public function insertar($tabla,$campos,$valores)
@@ -54,6 +53,14 @@ class conmysqli
 		$this->sql= 'INSERT INTO '.$tabla.' ('.$campos.') VALUES ('.$valores.');';
 		$this->consulta = mysqli_query($this->conexion, $this->sql);
 		return $this->sql;
+		//mysqli_free_result($this->consulta);
+		//mysqli_close($this->conexion);
+	}
+
+	public function mostrarInsertar($tabla,$campos,$valores)
+	{
+		$this->sql= 'INSERT INTO '.$tabla.' ('.$campos.') VALUES ('.$valores.');';
+		echo $this->sql;
 	}
 
 	public function editar($tabla,$campos,$condicion)
@@ -67,11 +74,44 @@ class conmysqli
 			$this->sql= 'UPDATE '.$tabla.' SET '.$campos.' WHERE '.$condicion.';';
 			$this->consulta = mysqli_query($this->conexion, $this->sql);
 			return $this->sql;
+			//mysqli_free_result($this->consulta);
+			//mysqli_close($this->conexion);
+		}
+	}
+
+	public function eliminar($tabla,$condicion)
+	{
+		if($condicion==null||$condicion=="")
+		{
+			return 'Error';
+		}
+		else
+		{
+			$this->sql= 'DELETE FROM '.$tabla.'  WHERE '.$condicion.';';
+			$this->consulta = mysqli_query($this->conexion, $this->sql);
+			//mysqli_free_result($this->consulta);
+			//mysqli_close($this->conexion);
+		}
+	}
+
+	public function mostrarEditar($tabla,$campos,$condicion)
+	{
+		if($condicion==null||$condicion=="")
+		{
+			return 'Error';
+		}
+		else
+		{
+			$this->sql= 'UPDATE '.$tabla.' SET '.$campos.' WHERE '.$condicion.';';
+			//$this->consulta = mysqli_query($this->conexion, $this->sql);
+			//echo $this->sql;
 		}
 	}
 
 	public function iniciarSesion($user,$password)
 	{
+		$password = md5($password);
+
 		$consulta = $this->consulta('Usuario.idPerfil,Usuario.intentos','Usuario INNER JOIN Empleado ON Usuario.idEmpleado = Empleado.identificacion','idEmpleado = '.$user.' AND idEstado = 1');
 		$this->resultado = mysqli_fetch_assoc($consulta);
 		
@@ -84,7 +124,7 @@ class conmysqli
 			else
 			{
 				$intentos = $this->resultado['intentos'];
-				$consulta = $this->consulta('idPerfil,intentos','usuario','idEmpleado = '.$user.' and contrasena = "'.$password.'"');
+				$consulta = $this->consulta('idPerfil,intentos','Usuario','idEmpleado = '.$user.' and contrasena = "'.$password.'"');
 				$this->resultado = mysqli_fetch_assoc($consulta);
 			}
 
@@ -136,6 +176,8 @@ class conmysqli
 		{
 			return 'UP';
 		}
+		//mysqli_free_result($this->resultado);
+		//mysqli_close($this->conexion);
 	}
 
 	public function validacion()
@@ -155,9 +197,9 @@ class conmysqli
 		{
 			return false;
 		}
+		//mysqli_free_result($this->resultado);
+		//mysqli_close($this->conexion);
 	}
-
-
 }
 ?>
 

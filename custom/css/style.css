@@ -238,21 +238,18 @@ footer
 .text72
 {
 	font-size: 72pt;
-	text-transform: capitalize;
 	text-align: right;
 	height: 75px;
 }
 .text60
 {
 	font-size: 60pt;
-	text-transform: capitalize;
 	text-align: right;
 	padding: 0px;
 	height: 62px;
 }
 .inp
 {
-	text-transform: capitalize;
 	color: black;
 	border: none;
 	outline: none;

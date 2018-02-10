@@ -159,14 +159,12 @@ footer
 .text60
 {
 	font-size: 60pt;
-	text-transform: capitalize;
 	text-align: right;
 	padding: 0px;
 	height: 62px;
 }
 .inp
 {
-	text-transform: capitalize;
 	width: 80%;
 	height: 30px;
 	color: black;
