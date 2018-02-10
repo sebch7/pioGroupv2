@@ -10,6 +10,12 @@
   src: url(fonts/googleFont.woff2) format('woff2');
 }
 
+#contenido_tarjeta label
+{
+	display: block !important;
+	width: 100% !important;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
