@@ -32,6 +32,9 @@
       </div>
 
       <div class="android-drawer mdl-layout__drawer">
+        <span class="mdl-layout-title">
+          <img class="android-logo-image" src="../img/android-logo.png">
+        </span>
         <nav id="menuPrincipal" class="mdl-navigation">
           
         </nav>
