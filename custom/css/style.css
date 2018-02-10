@@ -1,0 +1,463 @@
+
+h1,h2,h3,h4,h5,h6
+{
+	margin-bottom: 5px: 
+}
+.mdl-dialog
+{
+	top: 50px !important;
+	z-index: 10001;
+	width: 800px;
+	max-height: 550px;
+	overflow: scroll;
+}
+
+.titulo
+{
+	font-weight: bold;
+}
+.formSection
+{
+	columns: 2 !important;	
+}
+.sectionForm
+{
+	display:inline-block; 
+	margin-left:5px;
+}
+.mdl-data-table th
+{
+	color: white !important;
+}
+.dataTables_filter input
+{
+	width: 200px;
+	border-radius: 1px !important;
+	border: none;
+	border-bottom:1px solid #000;
+	font-size: 14pt;
+	font-weight: lighter; 
+	margin-bottom: 2px;
+}
+.mdl-data-table td
+{
+	border-color: #eee;
+	background: white !important; 
+}
+.dataTables_length select
+{
+	background: white;
+	width: 50px;
+	border-radius: 1px !important;
+	border: none;
+	font-size: 12pt;
+	font-weight: lighter; 
+}
+
+a
+{
+	text-decoration: none;
+}
+html,body
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+	background: #fff ;
+}
+input,button,span,div
+{
+	outline: none !important;
+}
+#container-modal-content
+{
+	//max-height: 300px;
+	overflow: scroll;
+}
+header
+{ 
+	display: block;
+	position: fixed;
+	height: 70px;
+	z-index: 1001;
+	width: 100%;
+	margin: 0 auto;
+	//background: #8C2D35;
+	text-align: center;
+	box-shadow: 2px 2px 2px gray;
+	overflow: hidden;
+}
+#container
+{
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	//background: #fff;
+	overflow: auto;
+	margin-bottom: 40px !important;
+	z-index: 6;
+}
+#container-central
+{
+	margin: 30px auto 0px; 
+	text-align: center;
+	width: 80%;
+	height: auto;
+	overflow: auto;
+}
+.iconDesDoc
+{
+	line-height: 15px;
+}
+.android-section-title
+{
+	text-align: left;
+}
+.busqueda
+{
+	cursor: pointer !important;
+}
+
+footer
+{
+	position: fixed;
+	width: 100%;
+	margin: 30px auto 0px;
+	height: 40px;
+	bottom: 0px;
+	text-align: center;
+	background: #000;
+	color: white;
+	z-index: 10;
+}
+#header-logo
+{ 
+	height: 45px;
+	padding:10px; 
+	overflow: hidden;
+	display: block;
+	cursor: pointer;
+}
+#header-logo img
+{
+	width: auto;
+	height: 50px;
+}
+#header-menu
+{
+	text-align: right;
+}
+#header-menu li
+{
+	display: inline-block;
+	width: auto;
+	padding: 0px 10px; 
+	margin-left: 10px;
+	text-align: left;
+	border-bottom: 1px solid #bbb;
+	margin: 0px 10px;
+}
+#header-menu li:hover
+{
+	border-bottom: 2px solid #b11600; 
+	cursor: pointer;
+	color: #b11600;
+}
+
+#tarjeta
+{
+	margin: 10px auto;
+	width: 280px;
+	height: auto;
+	overflow: hidden;
+	padding: 10px;
+	border: 1px solid black;
+}
+#titulo_tarjeta
+{
+	width: 100%;
+	height: 100px;
+	border-bottom: 3px solid #fff;
+	background: #8C2D35;
+	color: #fff;
+	overflow: hidden;
+
+}
+#contenido_tarjeta
+{
+	text-align: center;
+	padding: 30px 0px;
+	width: 100%;
+	min-height: 100px;
+	background: white;
+}
+#pie_tarjeta
+{
+	width: 100%;
+	height: auto;
+	padding: 5px 0px;
+	border-top: 3px solid #fff;
+	background: #eee;
+	color: #000;
+	overflow: hidden;
+
+}
+.agregar
+{
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+	border: 2px solid black;
+}
+.success:hover 
+{
+	border: 2px solid #8C2D35;
+	color: #8C2D35;
+}
+
+.danger:hover 
+{
+	border: 2px solid #b11600;
+	color: #b11600;
+}
+.left
+{
+	float: left;
+	text-align: left;
+	display: inline-block;
+	color: black;
+	margin-bottom: 10px;
+}
+small
+{
+	display: block;
+	margin:3px 0px 0px 0px;
+}
+#container p
+{
+	text-align: center;
+}
+
+.refImportant
+{
+	color: #b11600 !important;
+	text-decoration: none;
+}
+}
+a > small:hover,li > a
+{
+	color: #b11600;
+}
+a:visited
+{
+	color: black;
+}
+.tarjeta_plataforma
+{
+	margin: 10px;
+	display: inline-block;
+	width: 250px;
+	height: 250px;
+	border: 1px solid black;
+	overflow: hidden;
+}
+.tarjeta_plataforma:hover
+{
+	background: #b11600;
+}
+.tarjeta_plataforma img
+{
+	height: 80%;
+}
+.fondoAmarillo
+{
+	background: #8C2D35;
+}
+#btn-menu
+{
+	cursor: context-menu;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	background: #fff;
+	border: none;
+	color: white;
+	text-align: center;
+	font-size: 15pt;
+	vertical-align: middle;
+	outline: none;
+}
+#btn-menu img
+{
+	margin-top: 5px;
+	width: 90%;
+}
+
+#draggable i
+{
+	color: #b11600;
+	position: relative;
+	top: 2px;
+	left: -3px;
+}
+
+#menuFlotante
+{
+	display: none;
+	height: auto;
+	min-width: 150px;
+	width: 150px;
+	border: 1px solid black;
+	position: absolute;
+	//right: 50px;
+	//bottom: 60px;
+	z-index: 5000;
+	background: white;
+	margin-top: 45px;
+	margin-left: 45px;
+}
+.item-menu
+{
+	display: block;
+	margin: 5px 5px; 
+	padding: 5px;
+	display: pointer;
+	cursor: pointer; 
+}
+.item-menu:hover
+{
+	background: #8C2D35;
+}
+#menuFlotante ul
+{
+	margin: 0px;
+	padding: 0px;
+}
+#menuFlotante li
+{
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+#menuFlotante li:hover
+{
+	font-size: 15pt;
+	background: #8C2D35;
+}
+#nombreModulo
+{
+	border-bottom:2px solid black; 
+}
+table
+{
+	width: 100%;
+}
+th
+{
+	background: #8C2D35;
+	color: #fff;
+	border-bottom: 1px solid black;
+	padding: 5px;
+}
+td
+{
+	background: rgb(241, 239, 239);
+	padding: 5px;
+	text-transform: capitalize !important;
+}
+.icon-minimalista
+{
+	width: 20px;
+	cursor: pointer;
+}
+#draggable
+{
+	position: fixed;
+	z-index: 30000;
+	border: 1px solid #b11600;
+	background: #b11600; 
+	height: 30px;
+	width: 30px;
+	padding: 10px;
+	border-radius: 50%;
+	cursor: move;
+	top: 45px;
+	left: 20px;
+}
+
+.itemMenu
+{
+	width: 200px;
+	height: 200px;
+	margin:5px 0px;
+	display: inline-block;
+	overflow: hidden;
+	background: white;
+	border: 5px solid white;
+	cursor: pointer;
+}
+.itemMenu:hover
+{
+	border: 5px solid #b11600;
+}
+.editForm
+{
+	cursor: pointer;
+}
+#actionMenu
+{
+	width: 100%;
+	height: 50px;
+	text-align: right !important;
+}
+.orderBy
+{
+	cursor: pointer;
+}
+.inp-danger
+{
+	border-color: red;
+}
+#msg
+{
+	width: 100%;
+	color: black;
+}
+
+.enlaceTabla
+{
+	opacity: 0;
+	animation-name: enlaceTabla;
+	animation-duration: 0.7s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 10;
+}
+
+
+@keyframes enlaceTabla
+{
+	from{opacity: 0}
+	to{opacity: 1}
+}
+
+fieldset
+{
+	border:1px solid black;
+	padding:10px;
+	margin: 5px;
+}
+
+
+
+
+
+
+
+
+
