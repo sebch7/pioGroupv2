@@ -45,9 +45,10 @@
 						<th>Nombre</th>
 						<th>Identificacion</th>
 						<th>Telefono</th>
-						<th>Perfil</th>
 						<th>Granja</th>
+						<th>Perfil</th>
 						<th>Estado</th>
+						<th>Editar</th>
 					</thead>
 			</table>
 			</div>

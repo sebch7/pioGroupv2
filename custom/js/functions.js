@@ -170,23 +170,6 @@ $('document').ready(function()
 
 });
 
-	function positionMenu()
-	{
-		var wa = $(window).width();
-		var wh = $(window).height();
-
-		//$('#menuFlotante').css('top',topp).css('left',left).slideUp();
-		var position = $("#draggable").position();
-		topp = position.top;
-		left = position.left;
-
-		if((wa/2) < left)
-		{	top = position.top;
-			left = position.left-190;
-		}
-		$('#menuFlotante').css('top',topp).css('left',left).slideToggle();
-	}
-
 	function isset(data)
 	{
 		return data !== undefined;
@@ -626,6 +609,59 @@ $('document').ready(function()
 
 	function mostrarTablaUsuariosEmpresas()
 	{
+		var table =  $('#example').DataTable(
+		{
+		  "ajax": {
+		      "url": "../controller/services/select.php?accion=consultaUsuriosEmpresas",
+		      "dataSrc": ""
+		  },
+		  "initComplete": function () {
+        var api = this.api();
+        api.$('.busqueda').click( function () {
+            api.search( this.innerHTML ).draw();
+        });
+    	},
+		  "columns": [
+					{"data": "nombre"},
+					{"data": "identificacion"},
+					{"data": "empresa"},
+					{"data": "ciudad", "class": "busqueda"},
+					{"data": "telefonos"},
+		      {"data": "estado", "class": "busqueda" },
+		  	],
+		  	
+		  	"columnDefs": [
+        {
+            "targets": 6,
+            "data": "identificacion",
+            "render": function(data) {
+              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+            },
+        }],
+        
+		  	"language": {
+		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+		  },
+		  stateSave: true
+		});
+
+		$('#example tbody').on( 'click', 'span', function () {
+		  var dialog = document.querySelector('dialog');
+			formEditarEmpresa($(this).data('emco'));
+			dialogPolyfill.registerDialog(dialog);
+			dialog.showModal();
+			var showDialogButton = document.querySelector('span');
+			if (dialog.showModal) {
+			  dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+			  dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+			  dialog.close();
+			});
+		});
+		/*
 		idEmpresa = 0;
 
 		$('#tablaInfoHead').html('');
@@ -679,72 +715,121 @@ $('document').ready(function()
 	  	.always(function() {
 	    	
 	  });
+	  */
 	}
 
 	function mostrarTablaUsuarios()
 	{
-		idEmpresa = 0;
-
-		if(isset(dataGlobalUrl['id']))
+		var table =  $('#example').DataTable(
 		{
-			idEmpresa = dataGlobalUrl['id'];
-		}
-
-		$('#tablaInfoHead').html('');
-		$('#tablaInfoBody').html('');
-
-		var titulo = ['Nombres','Apellidos','Identificación','Ciudad','Teléfonos','Perfil','Granja','Estado','Editar'];
-
-		camposConsulta = '';
-		nombresCampos = '';
-		for(var i = 0;i < titulo.length;i++)
-		{
-			nombresCampos += '<th class="orderBy" id="'+i+'">'+titulo[i]+'</th>';
-		}
-		$('#tablaInfoHead').html(nombresCampos);
-
-		$('.orderBy').click(function()
-		{
-
+		  "ajax": {
+		      "url": "../controller/services/select.php?accion=consultaUsurios",
+		      "dataSrc": ""
+		  },
+		  "initComplete": function () {
+        var api = this.api();
+        api.$('.busqueda').click( function () {
+            api.search( this.innerHTML ).draw();
+        } );
+    	},
+		  "columns": [
+					{"data": "nombre"},
+					{"data": "identificacion"},
+					{"data": "telefonos"},
+					{"data": "granja", "class": "busqueda"},
+					{"data": "perfil", "class": "busqueda"},
+		      {"data": "estado", "class": "busqueda"},
+		  	],
+		  	
+		  	"columnDefs": [
+        {
+            "targets": 6,
+            "data": "identificacion",
+            "render": function(data) {
+              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+            },
+        }],
+        
+		  	"language": {
+		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+		  },
+		  stateSave: true
 		});
 
-		$.ajax({
-		  method: "POST",
-		  dataType: 'json',
-		  url: "../controller/services/select.php",
-		  data: {accion: 'consultaUsurios',idEmpresa: idEmpresa}
-		}).done(function(data) {
-
-		    for(var ii = 0; ii < data.length; ii++)
-		    {
-		    	camposConsulta += '<tr>';
-		    	camposConsulta += '<td>'+data[ii].nombres+'</td>';
-		    	camposConsulta += '<td>'+data[ii].Apellidos+'</td>';
-		    	camposConsulta += '<td>'+data[ii].identificacion+'</td>';
-		    	camposConsulta += '<td>'+data[ii].ciudad+'</td>';
-		    	camposConsulta += '<td>'+data[ii].telefonos+'</td>';
-		    	camposConsulta += '<td>'+data[ii].perfil+'</td>';
-		    	camposConsulta += '<td>'+data[ii].granja+'</td>';
-		    	camposConsulta += '<td>'+data[ii].estado+'</td>';
-		    	camposConsulta += '<td><span data-employed="'+data[ii].identificacion+'" class="material-icons editForm">create</span></td>';
-		    	camposConsulta += '</tr>';
-		    }
-		    $('#tablaInfoBody').html(camposConsulta);
-		    $('.editForm').click(function()
-		    {
-		    	formEditarUsuario($(this).data('employed'));
-		    });
-		})
-		.fail(function(data) {
-	    
-	  })
-	  	.always(function() {
-	    	
-	  });
+		$('#example tbody').on( 'click', 'span', function () {
+		  var dialog = document.querySelector('dialog');
+			formEditarUsuario($(this).data('emco'));
+			dialogPolyfill.registerDialog(dialog);
+			dialog.showModal();
+			var showDialogButton = document.querySelector('span');
+			if (dialog.showModal) {
+			  dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+			  dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+			  dialog.close();
+			});
+		});
 	}
 
+	//pendiente
 	function mostrarTablaInsumosGalpon()
 	{
+		var table =  $('#example').DataTable(
+		{
+		  "ajax": {
+		      "url": "../controller/services/select.php?accion=consultaInsumoGalpon",
+		      "dataSrc": ""
+		  },
+		  "initComplete": function () {
+        var api = this.api();
+        api.$('.busqueda').click( function () {
+            api.search( this.innerHTML ).draw();
+        } );
+    	},
+		  "columns": [
+					{"data": "nombre"},
+					{"data": "ciudad", "class": "busqueda"},
+					{"data": "responsable"},
+					{"data": "telefono"},
+		      {"data": "planComercial", "class": "busqueda" },
+		      {"data": "estado", "class": "busqueda" },
+		  	],
+		  	
+		  	"columnDefs": [
+        {
+            "targets": 6,
+            "data": "id",
+            "render": function(data) {
+              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+            },
+        }],
+        
+		  	"language": {
+		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+		  },
+		  stateSave: true
+		});
+
+		$('#example tbody').on( 'click', 'span', function () {
+		  var dialog = document.querySelector('dialog');
+			formEditarEmpresa($(this).data('emco'));
+			dialogPolyfill.registerDialog(dialog);
+			dialog.showModal();
+			var showDialogButton = document.querySelector('span');
+			if (dialog.showModal) {
+			  dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+			  dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+			  dialog.close();
+			});
+		});
+		/*	
 		idGalpon = 0;
 
 		if(isset(dataGlobalUrl['id']))
@@ -800,6 +885,7 @@ $('document').ready(function()
 	  	.always(function() {
 	    	
 	  });
+	  */
 	}
 
 
@@ -858,187 +944,172 @@ $('document').ready(function()
 			});
 		});
 	}
-	/*
-	function mostrarTablaEmpresas()
-	{
-		$('#tablaInfoHead').html('');
-		$('#tablaInfoBody').html('');
-
-		var titulo = ['Empresa','responsable','Pais','Departamento','Ciudad','Granjas','Tipo Plan','Estado','Editar'];
-
-		camposConsulta = '';
-		nombresCampos = '';
-		for(var i = 0;i < titulo.length;i++)
-		{
-			nombresCampos += '<th class="orderBy" id="'+i+'">'+titulo[i]+'</th>';
-		}
-		$('#tablaInfoHead').html(nombresCampos);
-
-		$('.orderBy').click(function()
-		{
-
-		});
-
-		$.ajax({
-		  method: "POST",
-		  dataType: 'json',
-		  url: "../controller/services/select.php",
-		  data: {accion: 'consultaEmpresas'}
-		}).done(function(data) {
-
-		    for(var ii = 0; ii < data.length; ii++)
-		    {
-		    	camposConsulta += '<tr>';
-		    	camposConsulta += '<td>'+data[ii].nombre+'<br>'+data[ii].nit+'</td>';
-		    	camposConsulta += '<td>'+data[ii].responsable+' - '+data[ii].telefono+'</td>';
-		    	camposConsulta += '<td>'+data[ii].pais+'</td>';
-		    	camposConsulta += '<td>'+data[ii].departamento+'</td>';
-		    	camposConsulta += '<td>'+data[ii].ciudad+'</td>';
-		    	camposConsulta += '<td><a class="enlaceTabla" href="granjas.php?id='+data[ii].id+'">'+data[ii].granja+'</a></td>';
-		    	//camposConsulta += '<td><a href="usuarios.php?id='+data[ii].id+'">'+data[ii].empleados+'</a></td>';
-		    	camposConsulta += '<td>'+data[ii].planComercial+'</td>';
-		    	camposConsulta += '<td>'+data[ii].estado+'</td>';
-		    	camposConsulta += '<td><span data-company="'+data[ii].id+'" class="material-icons editForm">create</span></td>';
-		    	camposConsulta += '</tr>';
-		    }
-		    $('#tablaInfoBody').html(camposConsulta);
-		    $('.editForm').click(function()
-		    {
-		    	formEditarEmpresa($(this).data('company'));
-		    });
-		})
-		.fail(function(data) {
-	    
-	  })
-	  	.always(function() {
-	    	
-	  });
-	}
-	*/
 
 	function mostrarTablaGranjas()
 	{
-		idEmpresa = 0;
-
-		if(isset(dataGlobalUrl['id']))
+		var table =  $('#example').DataTable(
 		{
-			idEmpresa = dataGlobalUrl['id'];
-		}
-
-		$('#tablaInfoHead').html('');
-		$('#tablaInfoBody').html('');
-
-		var titulo = ['Nombre','Empresa','Pais','Departamento','Ciudad','Galpones','Estado','Editar'];
-
-		camposConsulta = '';
-		nombresCampos = '';
-		for(var i = 0;i < titulo.length;i++)
-		{
-			nombresCampos += '<th class="orderBy" id="'+i+'">'+titulo[i]+'</th>';
-		}
-		$('#tablaInfoHead').html(nombresCampos);
-
-		$('.orderBy').click(function()
-		{
-
+		  "ajax": {
+		      "url": "../controller/services/select.php?accion=consultaGranjas",
+		      "dataSrc": ""
+		  },
+		  "initComplete": function () {
+        var api = this.api();
+        api.$('.busqueda').click( function () {
+            api.search( this.innerHTML ).draw();
+        } );
+    	},
+		  "columns": [
+					{"data": "nombre"},
+					{"data": "ciudad", "class": "busqueda"},
+					{"data": "galpon"},
+		      {"data": "estado", "class": "busqueda" },
+		  	],
+		  	
+		  	"columnDefs": [
+        {
+            "targets": 4,
+            "data": "id",
+            "render": function(data) {
+              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+            },
+        }],
+        
+		  	"language": {
+		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+		  },
+		  stateSave: true
 		});
 
-		$.ajax({
-		  method: "POST",
-		  dataType: 'json',
-		  url: "../controller/services/select.php",
-		  data: {accion: 'consultaGranjas',idEmpresa:idEmpresa}
-		}).done(function(data) {
-
-		    for(var ii = 0; ii < data.length; ii++)
-		    {
-		    	camposConsulta += '<tr>';
-		    	camposConsulta += '<td>'+data[ii].nombre+'</td>';
-		    	camposConsulta += '<td>'+data[ii].empresa+'</td>';
-		    	camposConsulta += '<td>'+data[ii].pais+'</td>';
-		    	camposConsulta += '<td>'+data[ii].departamento+'</td>';
-		    	camposConsulta += '<td>'+data[ii].ciudad+'</td>';
-		    	camposConsulta += '<td><a class="enlaceTabla" href="galpones.php?id='+data[ii].id+'">'+data[ii].galpon+'</a></td>';
-		    	camposConsulta += '<td>'+data[ii].estado+'</td>';
-		    	camposConsulta += '<td><span data-farm="'+data[ii].id+'" class="material-icons editForm">create</span></td>';
-		    	camposConsulta += '</tr>';
-		    }
-		    $('#tablaInfoBody').html(camposConsulta);
-		    $('.editForm').click(function()
-		    {
-		    	formEditarGranja($(this).data('farm'));
-		    });
-		})
-		.fail(function(data) {
-	    
-	  })
-	  	.always(function() {
-	    	
-	  });
+		$('#example tbody').on( 'click', 'span', function () {
+		  var dialog = document.querySelector('dialog');
+			formEditarGranja($(this).data('emco'));
+			dialogPolyfill.registerDialog(dialog);
+			dialog.showModal();
+			var showDialogButton = document.querySelector('span');
+			if (dialog.showModal) {
+			  dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+			  dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+			  dialog.close();
+			});
+		});
 	}
 
 	function mostrarTablaInsumos()
 	{
-		idGranja = 0;
-
-		if(isset(dataGlobalUrl['id']))
+				var table =  $('#example').DataTable(
 		{
-			idGranja = dataGlobalUrl['id'];
-		}
-
-		$('#tablaInfoHead').html('');
-		$('#tablaInfoBody').html('');
-
-		var titulo = ['Nombre','Granja','Fecha Compra','Cantidad Total','Cantidad Disponible','Fecha Final'];
-
-		camposConsulta = '';
-		nombresCampos = '';
-		for(var i = 0;i < titulo.length;i++)
-		{
-			nombresCampos += '<th class="orderBy" id="'+i+'">'+titulo[i]+'</th>';
-		}
-		$('#tablaInfoHead').html(nombresCampos);
-
-		$('.orderBy').click(function()
-		{
-
+		  "ajax": {
+		      "url": "../controller/services/select.php?accion=consultaInsumos",
+		      "dataSrc": ""
+		  },
+		  "initComplete": function () {
+        var api = this.api();
+        api.$('.busqueda').click( function () {
+            api.search( this.innerHTML ).draw();
+        } );
+    	},
+		  "columns": [
+					{"data": "nombre"},
+					{"data": "fechaInicio", "class": "busqueda"},
+					{"data": "cantidad"},
+					{"data": "cantidadUsada"},
+		      {"data": "fechaFinal", "class": "busqueda" },
+		      {"data": "granja", "class": "busqueda" },
+		  	],
+		  	
+		  	"columnDefs": [
+        {
+            "targets": 6,
+            "data": "id",
+            "render": function(data) {
+              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+            },
+        }],
+        
+		  	"language": {
+		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+		  },
+		  stateSave: true
 		});
 
-		$.ajax({
-		  method: "POST",
-		  dataType: 'json',
-		  url: "../controller/services/select.php",
-		  data: {accion: 'consultaInsumos',idGranja:idGranja}
-		}).done(function(data) {
-
-		    for(var ii = 0; ii < data.length; ii++)
-		    {
-		    	camposConsulta += '<tr>';
-		    	camposConsulta += '<td>'+data[ii].nombre+'</td>';
-		    	camposConsulta += '<td>'+data[ii].Granja+'</td>';
-		    	camposConsulta += '<td>'+formatDate('2017-01-03')+'</td>';
-		    	camposConsulta += '<td>'+data[ii].cantidad+' '+data[ii].TipoCantidad+'</td>';
-		    	camposConsulta += '<td>'+data[ii].cantidadUsada+' '+data[ii].TipoCantidad+'</td>';
-		    	camposConsulta += '<td>'+data[ii].fechaFinal+'</td>';
-		    	camposConsulta += '</tr>';
-		    }
-		    $('#tablaInfoBody').html(camposConsulta);
-		    $('.editForm').click(function()
-		    {
-		    	formEditarGalpon($(this).data('galpon'));
-		    });
-		})
-		.fail(function(data) {
-	    
-	  })
-	  	.always(function() {
-	    	
-	  });
+		$('#example tbody').on( 'click', 'span', function () {
+		  var dialog = document.querySelector('dialog');
+			formEditarEmpresa($(this).data('emco'));
+			dialogPolyfill.registerDialog(dialog);
+			dialog.showModal();
+			var showDialogButton = document.querySelector('span');
+			if (dialog.showModal) {
+			  dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+			  dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+			  dialog.close();
+			});
+		});
 	}
 
 	function mostrarTablaGalpones(data)
 	{
-		idGranja = 0;
+		var table =  $('#example').DataTable(
+		{
+		  "ajax": {
+		      "url": "../controller/services/select.php?accion=consultaGalpones",
+		      "dataSrc": ""
+		  },
+		  "initComplete": function () {
+        var api = this.api();
+        api.$('.busqueda').click( function () {
+            api.search( this.innerHTML ).draw();
+        } );
+    	},
+		  "columns": [
+					{"data": "nombre"},
+					{"data": "granja", "class": "busqueda"},
+					{"data": "clima"},
+					{"data": "capacidad"},
+					{"data": "disponibilidad"},
+		      {"data": "estado", "class": "busqueda" },
+		  	],
+		  	
+		  	"columnDefs": [
+        {
+            "targets": 6,
+            "data": "id",
+            "render": function(data) {
+              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+            },
+        }],
+        
+		  	"language": {
+		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+		  },
+		  stateSave: true
+		});
+
+		$('#example tbody').on( 'click', 'span', function () {
+		  var dialog = document.querySelector('dialog');
+			formEditarGalpon ($(this).data('emco'));
+			dialogPolyfill.registerDialog(dialog);
+			dialog.showModal();
+			var showDialogButton = document.querySelector('span');
+			if (dialog.showModal) {
+			  dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+			  dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+			  dialog.close();
+			});
+		});
+		/*
 
 		if(isset(dataGlobalUrl['id']))
 		{
@@ -1093,6 +1164,7 @@ $('document').ready(function()
 	  	.always(function() {
 	    	
 	  });
+	  */
 	}
 
 	function accionFormulario(formulario)

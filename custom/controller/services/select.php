@@ -8,7 +8,7 @@
 
 			$arrayUser=array();
 
-			$resultado = $db->consulta('Empleado.identificacion as identificacion,CONCAT(Empleado.primerNombre," ",Empleado.segundoNombre) as nombres,CONCAT(Empleado.primerApellido," ",Empleado.segundoApellido) as Apellidos,Empleado.identificacion as identificacion,Ciudad.nombre as ciudad,CONCAT(Empleado.telefonoFijo," - ",Empleado.telefonoCelular) as telefonos,Perfil.nombre as perfil,Estado.nombre as estado,Empresa.nombre as empresa','Empleado LEFT JOIN Ciudad ON Ciudad.id = Empleado.idCiudad LEFT JOIN Usuario ON Usuario.idEmpleado = Empleado.identificacion LEFT JOIN Perfil ON Usuario.idPerfil = Perfil.id LEFT JOIN Estado ON Estado.id = Empleado.idEstado LEFT JOIN Empresa ON Empresa.id = Empleado.idEmpresa','1');
+			$resultado = $db->consulta('Empleado.identificacion as identificacion,CONCAT(Empleado.primerNombre," ",Empleado.segundoNombre," ",Empleado.primerApellido," ",Empleado.segundoApellido) as nombre,Ciudad.nombre as ciudad,CONCAT(Empleado.telefonoFijo," - ",Empleado.telefonoCelular) as telefonos,Perfil.nombre as perfil,Estado.nombre as estado,Empresa.nombre as empresa','Empleado LEFT JOIN Ciudad ON Ciudad.id = Empleado.idCiudad LEFT JOIN Usuario ON Usuario.idEmpleado = Empleado.identificacion LEFT JOIN Perfil ON Usuario.idPerfil = Perfil.id LEFT JOIN Estado ON Estado.id = Empleado.idEstado LEFT JOIN Empresa ON Empresa.id = Empleado.idEmpresa','1');
 			
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{
@@ -20,13 +20,10 @@
 		case 'consultaUsurios':
 
 			$consultaExtra = '';
-			if($_POST['idEmpresa'] != 0)
-			{
-				$consultaExtra = ' AND Empleado.idEmpresa = '.$_POST['idEmpresa'];
-			}
+			
 			$arrayUser=array();
 
-			$resultado = $db->consulta('Empleado.identificacion,CONCAT(Empleado.primerNombre," ",Empleado.segundoNombre) as nombres,CONCAT(Empleado.primerApellido," ",Empleado.segundoApellido) as Apellidos,Empleado.identificacion as identificacion,Ciudad.nombre as ciudad,CONCAT(Empleado.telefonoFijo," - ",Empleado.telefonoCelular) as telefonos,Perfil.nombre as perfil,Estado.nombre as estado,IFNULL(Granja.nombre,"No Asignada") as granja','Empleado LEFT JOIN Ciudad ON Ciudad.id = Empleado.idCiudad LEFT JOIN Usuario ON Usuario.idEmpleado = Empleado.identificacion LEFT JOIN Perfil ON Usuario.idPerfil = Perfil.id LEFT JOIN Estado ON Estado.id = Empleado.idEstado LEFT JOIN Granja ON Granja.id = Empleado.idGranja','Empleado.idEmpresa = '.$_SESSION['empresa'].$consultaExtra);
+			$resultado = $db->consulta('CONCAT(Empleado.primerNombre," ",Empleado.segundoNombre," ",Empleado.primerApellido," ",Empleado.segundoApellido) as nombre,Empleado.identificacion as identificacion,Ciudad.nombre as ciudad,CONCAT(Empleado.telefonoFijo," - ",Empleado.telefonoCelular) as telefonos,Perfil.nombre as perfil,Estado.nombre as estado,IFNULL(Granja.nombre,"No Asignada") as granja','Empleado LEFT JOIN Ciudad ON Ciudad.id = Empleado.idCiudad LEFT JOIN Usuario ON Usuario.idEmpleado = Empleado.identificacion LEFT JOIN Perfil ON Usuario.idPerfil = Perfil.id LEFT JOIN Estado ON Estado.id = Empleado.idEstado LEFT JOIN Granja ON Granja.id = Empleado.idGranja','Empleado.idEmpresa = '.$_SESSION['empresa'].$consultaExtra);
 			
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{
@@ -58,15 +55,15 @@
 			//consulta los usuarios de una empresa
 			$resultado = $db->consulta('Granja.id as id,Empresa.nombre as empresa,Granja.nombre as nombre,Pais.nombre as pais,Departamento.nombre as departamento,Ciudad.nombre as ciudad,Estado.Nombre as estado,COUNT(Galpon.id) as galpon','Granja INNER JOIN Pais ON Pais.id = Granja.idPais INNER JOIN Departamento ON Departamento.id = Granja.idDepartamento INNER JOIN Ciudad ON Ciudad.id = Granja.idCiudad INNER JOIN Estado ON Estado.id = Granja.idEstado INNER JOIN Empresa ON Empresa.id = Granja.idEmpresa LEFT JOIN Galpon ON Galpon.idGranja = Granja.id','1 AND Granja.idEmpresa = '.$_SESSION['empresa'].' GROUP BY Granja.id');
 
-			if($_SESSION['idPerfil'] == 1)
-			{
-				$consultaExtra = '';
-				if($_POST['idEmpresa'] != 0)
-				{
-					$consultaExtra = 'AND Granja.idEmpresa = '.$_POST['idEmpresa'];
-				}
-				$resultado = $db->consulta('Granja.id as id,Empresa.nombre as empresa,Granja.nombre as nombre,Pais.nombre as pais,Departamento.nombre as departamento,Ciudad.nombre as ciudad,Estado.Nombre as estado,COUNT(Galpon.id) as galpon','Granja INNER JOIN Pais ON Pais.id = Granja.idPais INNER JOIN Departamento ON Departamento.id = Granja.idDepartamento INNER JOIN Ciudad ON Ciudad.id = Granja.idCiudad INNER JOIN Estado ON Estado.id = Granja.idEstado INNER JOIN Empresa ON Empresa.id = Granja.idEmpresa LEFT JOIN Galpon ON Galpon.idGranja = Granja.id','1 '.$consultaExtra.' GROUP BY Granja.id');
-			}
+			//if($_SESSION['idPerfil'] == 1)
+			//{
+				//$consultaExtra = '';
+				//if($_POST['idEmpresa'] != 0)
+				//{
+					//$consultaExtra = 'AND Granja.idEmpresa = '.$_POST['idEmpresa'];
+				//}
+				$resultado = $db->consulta('Granja.id as id,Granja.nombre as nombre,Pais.nombre as pais,Departamento.nombre as departamento,Ciudad.nombre as ciudad,Estado.Nombre as estado,COUNT(Galpon.id) as galpon','Granja INNER JOIN Pais ON Pais.id = Granja.idPais INNER JOIN Departamento ON Departamento.id = Granja.idDepartamento INNER JOIN Ciudad ON Ciudad.id = Granja.idCiudad INNER JOIN Estado ON Estado.id = Granja.idEstado INNER JOIN Empresa ON Empresa.id = Granja.idEmpresa LEFT JOIN Galpon ON Galpon.idGranja = Granja.id','1  GROUP BY Granja.id');
+			//}
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{
@@ -107,6 +104,7 @@
 
 		case 'consultaInsumos':
 			$consultaExtra = '';
+			/*
 			if($_POST['idGranja'] != 0)
 			{
 				$consultaExtra = 'AND Insumo.idGranja = '.$_POST['idGranja'];
@@ -115,9 +113,10 @@
 			{
 				$consultaExtra = 'AND Granja.idEmpresa = '.$_SESSION['empresa'];
 			}
+			*/
 			$arrayUser=array();
 			//consulta los usuarios de una empresa
-		 	$resultado = $db->consulta('Insumo.nombre as nombre,Insumo.fechaInicio as fechaInicio,Insumo.fechaFinal as fechaFinal,Insumo.Cantidad as cantidad,Insumo.fechaCreacion as fechaCreacion,Insumo.cantidadUsada as cantidadUsada,Granja.nombre as Granja,Granja.id as idGranja,TipoCantidad.abreviatura as TipoCantidad','Insumo INNER JOIN Granja ON Insumo.idGranja = Granja.id INNER JOIN Empresa ON Empresa.id = Granja.idEmpresa LEFT JOIN TipoCantidad ON TipoCantidad.id = Insumo.idTipoCantidad','1 '.$consultaExtra.'');
+		 	$resultado = $db->consulta('Insumo.nombre as nombre,Insumo.fechaInicio as fechaInicio,Insumo.fechaFinal as fechaFinal,Insumo.Cantidad as cantidad,Insumo.fechaCreacion as fechaCreacion,Insumo.cantidadUsada as cantidadUsada,Granja.nombre as granja,Granja.id as idGranja,TipoCantidad.abreviatura as TipoCantidad','Insumo INNER JOIN Granja ON Insumo.idGranja = Granja.id INNER JOIN Empresa ON Empresa.id = Granja.idEmpresa LEFT JOIN TipoCantidad ON TipoCantidad.id = Insumo.idTipoCantidad','1 '.$consultaExtra.'');
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{
@@ -132,10 +131,7 @@
 		case 'consultaInsumoGalpon':
 			$consultaExtra = '';
 			$arrayUser=array();
-			if($_POST['idGalpon'] != 0)
-			{
-				$consultaExtra = 'AND InsumoGalpon.idGalpon = '.$_POST['idGalpon'];
-			}
+			
 			$resultado = $db->consulta('Insumo.Nombre as insumo,Galpon.nombre as galpon,InsumoGalpon.fechaInicio as fechaInicio,InsumoGalpon.cantidad as cantidad, TipoCantidad.nombre as tipo','InsumoGalpon INNER JOIN Galpon ON InsumoGalpon.idGalpon = Galpon.id INNER JOIN Insumo ON Insumo.id = InsumoGalpon.idInsumo INNER JOIN TipoCantidad ON TipoCantidad.id = Insumo.idTipoCantidad','1 '.$consultaExtra.'');
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
@@ -150,18 +146,18 @@
 		case 'consultaGalpones':
 
 			$consultaExtra = '';
-			if($_POST['idGranja'] != 0)
+			/*if($_POST['idGranja'] != 0)
 			{
 				$consultaExtra = 'Galpon.idGranja = '.$_POST['idGranja'];
 			}
 			else
 			{
 				$consultaExtra = 'Empresa.id = '.$_SESSION['empresa'];
-			}
+			}*/
 			
 			$arrayUser=array();
 			//consulta los usuarios de una empresa
-			$resultado = $db->consulta('Galpon.id as id,Galpon.nombre as nombre,granja.nombre as granja,Galpon.disponibilidad as disponibilidad,TipoClima.nombre as clima,Galpon.capacidad,Estado.nombre as estado','Empresa INNER JOIN Granja ON Empresa.id = Granja.idEmpresa INNER JOIN Galpon ON galpon.idGranja = Granja.id INNER JOIN TipoClima ON TipoClima.id = Galpon.idTipoClima INNER JOIN Estado ON Estado.id = Galpon.idEstado',$consultaExtra);
+			$resultado = $db->consulta('Galpon.id as id,Galpon.nombre as nombre,granja.nombre as granja,Galpon.disponibilidad as disponibilidad,TipoClima.nombre as clima,Galpon.capacidad,Estado.nombre as estado','Empresa INNER JOIN Granja ON Empresa.id = Granja.idEmpresa INNER JOIN Galpon ON galpon.idGranja = Granja.id INNER JOIN TipoClima ON TipoClima.id = Galpon.idTipoClima INNER JOIN Estado ON Estado.id = Galpon.idEstado','1 '.$consultaExtra);
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{
