@@ -5,9 +5,7 @@
 	$database = new database();
 	$conmysqli = new conmysqli($database->server,$database->user,$database->pass,$database->database);
 
-	$login = $conmysqli->iniciarSesion($_POST['user'], $_POST['password']);
-
-	echo $login;
+	$login = $conmysqli->iniciarSesion($_POST['user'],$_POST['password']);
 
 	switch ($login) {
 		case 'IN':
@@ -19,7 +17,6 @@
 			header('location:recuperarContrasena.php?op=IN');
 		break;
 		case 'SC':
-
 			header('location:pages/home.php');
 		break;
 		case 'CE':

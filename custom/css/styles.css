@@ -34,14 +34,14 @@ a img{
 }
 .btn-primary
 {
-  background: #A33A2C;
+  background: #8C2D35;
   color: white;
 }
 
 .btn-primary:hover
 {
   color: white !important;
-  background: #A33A2C !important;
+  background: #8C2D35 !important;
 }
 
 ::-moz-selection {
@@ -59,8 +59,8 @@ a img{
 }
 .android-header
 {
-  border-bottom: 2px solid #cc8c1b !important;
-  background: #cc8c1b !important;
+  border-bottom: 2px solid #8C2D35 !important;
+  background: #8C2D35 !important;
   color: white !important;
 }
 

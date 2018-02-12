@@ -1109,62 +1109,6 @@ $('document').ready(function()
 			  dialog.close();
 			});
 		});
-		/*
-
-		if(isset(dataGlobalUrl['id']))
-		{
-			idGranja = dataGlobalUrl['id'];
-		}
-		$('#tablaInfoHead').html('');
-		$('#tablaInfoBody').html('');
-
-		var titulo = ['Nombre','Granja','Clima','Capacidad','Disponibilidad','Estado','Editar'];
-
-		camposConsulta = '';
-		nombresCampos = '';
-		for(var i = 0;i < titulo.length;i++)
-		{
-			nombresCampos += '<th class="orderBy" id="'+i+'">'+titulo[i]+'</th>';
-		}
-		$('#tablaInfoHead').html(nombresCampos);
-
-		$('.orderBy').click(function()
-		{
-
-		});
-
-		$.ajax({
-		  method: "POST",
-		  dataType: 'json',
-		  url: "../controller/services/select.php",
-		  data: {accion: 'consultaGalpones',idGranja: idGranja}
-		}).done(function(data) {
-
-		    for(var ii = 0; ii < data.length; ii++)
-		    {
-		    	camposConsulta += '<tr>';
-		    	camposConsulta += '<td>'+data[ii].nombre+'</td>';
-		    	camposConsulta += '<td>'+data[ii].granja+'</td>';
-		    	camposConsulta += '<td>'+data[ii].clima+'</td>';
-		    	camposConsulta += '<td>'+data[ii].capacidad+'</td>';
-		    	camposConsulta += '<td>'+data[ii].disponibilidad+'</td>';
-		    	camposConsulta += '<td>'+data[ii].estado+'</td>';
-		    	camposConsulta += '<td><span data-galpon="'+data[ii].id+'" class="material-icons editForm">create</span></td>';
-		    	camposConsulta += '</tr>';
-		    }
-		    $('#tablaInfoBody').html(camposConsulta);
-		    $('.editForm').click(function()
-		    {
-		    	formEditarGalpon($(this).data('galpon'));
-		    });
-		})
-		.fail(function(data) {
-	    
-	  })
-	  	.always(function() {
-	    	
-	  });
-	  */
 	}
 
 	function accionFormulario(formulario)

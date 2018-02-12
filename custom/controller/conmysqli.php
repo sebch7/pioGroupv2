@@ -37,8 +37,8 @@ class conmysqli
 		$this->sql='SELECT '.$campos.' FROM '.$tabla.' WHERE '.$condicion.';';
 		$this->resultado = mysqli_query($this->conexion, $this->sql);
  		return $this->resultado;
- 		//mysqli_free_result($this->resultado);
- 		//mysqli_close($this->conexion);
+ 		mysqli_free_result($this->resultado);
+ 		mysqli_close($this->conexion);
 	}
 
 	public function mostrarConsulta($campos,$tabla,$condicion)
@@ -53,8 +53,8 @@ class conmysqli
 		$this->sql= 'INSERT INTO '.$tabla.' ('.$campos.') VALUES ('.$valores.');';
 		$this->consulta = mysqli_query($this->conexion, $this->sql);
 		return $this->sql;
-		//mysqli_free_result($this->consulta);
-		//mysqli_close($this->conexion);
+		mysqli_free_result($this->consulta);
+		mysqli_close($this->conexion);
 	}
 
 	public function mostrarInsertar($tabla,$campos,$valores)
@@ -74,8 +74,8 @@ class conmysqli
 			$this->sql= 'UPDATE '.$tabla.' SET '.$campos.' WHERE '.$condicion.';';
 			$this->consulta = mysqli_query($this->conexion, $this->sql);
 			return $this->sql;
-			//mysqli_free_result($this->consulta);
-			//mysqli_close($this->conexion);
+			mysqli_free_result($this->consulta);
+			mysqli_close($this->conexion);
 		}
 	}
 
@@ -89,8 +89,8 @@ class conmysqli
 		{
 			$this->sql= 'DELETE FROM '.$tabla.'  WHERE '.$condicion.';';
 			$this->consulta = mysqli_query($this->conexion, $this->sql);
-			//mysqli_free_result($this->consulta);
-			//mysqli_close($this->conexion);
+			mysqli_free_result($this->consulta);
+			mysqli_close($this->conexion);
 		}
 	}
 
@@ -106,6 +106,21 @@ class conmysqli
 			//$this->consulta = mysqli_query($this->conexion, $this->sql);
 			//echo $this->sql;
 		}
+	}
+
+	public function generarTtokem()
+	{
+		$caracter = array('q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','ñ','z','x','c','v','b','n','m','|','@','#','$','&','/','(',')','=','*','{','}');
+
+		$token = '';
+
+		for($i=0;$i<=8;$i++)
+		{
+			$ramdon = rand(1,(count($caracter)-1));
+			$token = $token.''.$caracter[$ramdon];
+		}
+
+		return $token;
 	}
 
 	public function iniciarSesion($user,$password)
@@ -137,8 +152,9 @@ class conmysqli
 				}
 				else
 				{
-
-					$this->editar('Usuario','intentos = 0,ultimoLogin = "'.date('Y-m-d h:m:s').'"','idEmpleado = '.$user);
+					//$token = 'sss';
+					$token = md5($this->generarTtokem());
+					$this->editar('Usuario','intentos = 0,token = "'.$token.'",ultimoLogin = "'.date('Y-m-d h:m:s').'"','idEmpleado = '.$user);
 					$_SESSION['idPerfil'] = $this->resultado['idPerfil'];
 
 					$this->consulta('CONCAT(Empleado.primerNombre," ",Empleado.primerApellido) as empleado,Empleado.identificacion as usuario,Usuario.idPerfil as idPerfil,Perfil.nombre as perfil,Empleado.idEmpresa as Empresa,Empresa.nombre as nombreEmpresa,Usuario.contrasena as contrasena','Empleado INNER JOIN Usuario ON Usuario.idEmpleado = Empleado.identificacion INNER JOIN Perfil ON Perfil.id = Usuario.idPerfil INNER JOIN Empresa ON Empresa.id = Empleado.idEmpresa','Empleado.identificacion = '.$user.';');
@@ -152,7 +168,8 @@ class conmysqli
 					$_SESSION['perfil'] = $this->resultado['perfil'];//nombrePerfil
 					$_SESSION['empresa'] = $this->resultado['Empresa'];//idEmpresa
 					$_SESSION['nombreEmpresa'] = $this->resultado['nombreEmpresa'];//idEmpresa
-					$_SESSION['contrasena'] = $this->resultado['contrasena'];;
+					$_SESSION['contrasena'] = $this->resultado['contrasena'];
+					$_SESSION['token'] = $token;
 					return 'SC';
 				}
 			}
@@ -176,13 +193,13 @@ class conmysqli
 		{
 			return 'UP';
 		}
-		//mysqli_free_result($this->resultado);
-		//mysqli_close($this->conexion);
+		mysqli_free_result($this->resultado);
+		mysqli_close($this->conexion);
 	}
 
 	public function validacion()
 	{
-		$this->consulta('Usuario.idPerfil as idPerfil,Perfil.nombre as perfil','Usuario INNER JOIN Perfil ON Perfil.id = Usuario.idPerfil ','Usuario.idEmpleado = '.$_SESSION['usuario'].' AND Usuario.contrasena = "'.$_SESSION['contrasena'].'"');
+		$this->consulta('Usuario.idPerfil as idPerfil,Perfil.nombre as perfil,Usuario.token as token','Usuario INNER JOIN Perfil ON Perfil.id = Usuario.idPerfil ','Usuario.idEmpleado = '.$_SESSION['usuario'].' AND Usuario.contrasena = "'.$_SESSION['contrasena'].'" AND Usuario.token = "'.$_SESSION['token'].'"');
 		$this->resultado = mysqli_query($this->conexion,$this->sql) or die(mysqli_error($this->conexion));
 		$this->resultado = mysqli_fetch_assoc($this->resultado);
 
@@ -200,6 +217,8 @@ class conmysqli
 		//mysqli_free_result($this->resultado);
 		//mysqli_close($this->conexion);
 	}
+
+	
 }
 ?>
 

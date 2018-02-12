@@ -15,8 +15,7 @@
 	
 	$validacion = $db->validacion();
 
-	$validacion;
-
+	
 	if(!$validacion)
 	{
 		// remove all session variables
@@ -26,7 +25,5 @@
 
 		header('location:index.php');
 	}
-
-
 
 ?>
