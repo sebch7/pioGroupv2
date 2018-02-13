@@ -39,7 +39,7 @@
 
 			$arrayUser=array();
 			//consulta los usuarios de una empresa
-			$resultado = $db->mostrarConsulta('Empresa.id as id,Empresa.nombre as nombre,Pais.nombre as pais,Empresa.telefono as telefono,Empresa.nit as nit,Empresa.personaResponsable as responsable,Departamento.nombre as departamento,Ciudad.nombre as ciudad,Estado.Nombre as estado,COUNT(Granja.id) as granja,PlanComercial.nombre as planComercial','Empresa INNER JOIN Pais ON Pais.id = Empresa.idPais INNER JOIN Departamento ON Departamento.id = Empresa.idDepartamento INNER JOIN Ciudad ON Ciudad.id = Empresa.idCiudad INNER JOIN Estado ON Estado.id = Empresa.idEstado LEFT JOIN Granja ON Granja.idEmpresa = Empresa.id INNER JOIN PlanComercial ON PlanComercial.id = Empresa.idPlanComercial','1 GROUP BY Empresa.id');
+			$resultado = $db->consulta('Empresa.id as id,Empresa.nombre as nombre,Pais.nombre as pais,Empresa.telefono as telefono,Empresa.nit as nit,Empresa.personaResponsable as responsable,Departamento.nombre as departamento,Ciudad.nombre as ciudad,Estado.Nombre as estado,COUNT(Granja.id) as granja,PlanComercial.nombre as planComercial','Empresa INNER JOIN Pais ON Pais.id = Empresa.idPais INNER JOIN Departamento ON Departamento.id = Empresa.idDepartamento INNER JOIN Ciudad ON Ciudad.id = Empresa.idCiudad INNER JOIN Estado ON Estado.id = Empresa.idEstado LEFT JOIN Granja ON Granja.idEmpresa = Empresa.id INNER JOIN PlanComercial ON PlanComercial.id = Empresa.idPlanComercial','1 GROUP BY Empresa.id');
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{
