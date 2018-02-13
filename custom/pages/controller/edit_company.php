@@ -15,6 +15,7 @@
 		$arrayUser[]=$_cap;
 		$_cap;
 	}
+	
 	$anterior = $arrayUser[0]['nombre'].'-'.$arrayUser[0]['nit'].'-'.$arrayUser[0]['telefono'].'-'.$arrayUser[0]['personaResponsable'].'-'.$arrayUser[0]['idEstado'];
 
 	$consulta = $db->editar('Empresa',' nombre = "'.$_POST['nombre'].'", nit = "'.$_POST['nit'].'", telefono = "'.$_POST['telefono'].'", personaResponsable = "'.$_POST['personaResponsable'].'", idEstado = "'.$_POST['idEstado'].'"','id = '.$_POST['idEmpresa']);
