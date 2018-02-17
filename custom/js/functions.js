@@ -49,8 +49,8 @@ $('document').ready(function()
 
 	$('#nuevoUsuarioEmpresa').click(function()
 	{
-		var titulo = ['Primer Nombre','Segundo Nombre','Primer Apellido','Segundo Apellido','Fecha de Nacimiento','Tipo de Documento','Número de Documento','Teléfono Fijo','Teléfono Celular','EPS','Pais','Departamento','Ciudad','Dirección','Genero','Empresa'];//
-		var campo = ['r_primerNombre','i_segundoNombre','r_primerApellido','i_segundoApellido','rd_fechaNacimiento','rs_idTipoDocumento','rn_identificacion','rn_telefonoFijo','n_telefonoCelular','rs_idAdministradoraEps','rs_idPais','rs_idDepartamento','rs_idCiudad','r_direccion','rs_idGenero','rs_idEmpresa'];//
+		var titulo = ['Primer Nombre','Segundo Nombre','Primer Apellido','Segundo Apellido','Fecha de Nacimiento','Tipo de Documento','Número de Documento','Teléfono Fijo','Teléfono Celular','EPS','Departamento','Ciudad','Dirección','Genero','Empresa'];//
+		var campo = ['r_primerNombre','i_segundoNombre','r_primerApellido','i_segundoApellido','rd_fechaNacimiento','rs_idTipoDocumento','rn_identificacion','rn_telefonoFijo','n_telefonoCelular','rs_idAdministradoraEps','rs_idDepartamento','rs_idCiudad','r_direccion','rs_idGenero','rs_idEmpresa'];//
 		var formulario = 'new_userCompany';
 		$('#container-modal-title').html('<h2>Nuevo Usuario-Empresa</h2>');
 		formNuevo(titulo,campo,formulario);
@@ -647,7 +647,7 @@ $('document').ready(function()
 
 		$('#example tbody').on( 'click', 'span', function () {
 		  var dialog = document.querySelector('dialog');
-			formEditarEmpresa($(this).data('emco'));
+			formEditarUsuarioEmpresa($(this).data('emco'));
 			dialogPolyfill.registerDialog(dialog);
 			dialog.showModal();
 			var showDialogButton = document.querySelector('span');

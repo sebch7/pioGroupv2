@@ -14,7 +14,7 @@
 	}
 	else
 	{
-		echo $consulta = $db->insertar('Empresa','nombre,nit,telefono,personaResponsable,idPais,idDepartamento,idCiudad,idEstado,idPlanComercial,fechaCreacion',"'".$_POST["nombre"]."','".$_POST["nit"]."','".$_POST["telefono"]."','".$_POST["personaResponsable"]."','".$_POST["idPais"]."','".$_POST["idDepartamento"]."','".$_POST["idCiudad"]."','".$_POST["idEstado"]."','".$_POST["idPlanComercial"]."','".date('Y-m-d')."'");
+		echo $consulta = $db->insertar('Empresa','nombre,nit,telefono,personaResponsable,idPais,idDepartamento,idCiudad,idEstado,idPlanComercial,fechaCreacion',"'".$_POST["nombre"]."','".$_POST["nit"]."','".$_POST["telefono"]."','".$_POST["personaResponsable"]."','57','".$_POST["idDepartamento"]."','".$_POST["idCiudad"]."','1','".$_POST["idPlanComercial"]."','".date('Y-m-d')."'");
 
 		$historial = $db->insertar('Historial','fecha,modulo,tabla,accion,textoAnterior,textoNuevo,idEmpleado','"'.date('Y-m-d h:i:s').'","Empresas","Empresa","Nueva Empresa","","'.$_POST['nombre'].'",'.$_SESSION['usuario']);
 

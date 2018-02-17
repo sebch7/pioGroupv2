@@ -30,7 +30,7 @@
 						{
 							switch ($_GET['msg']) {
 								case 'CR':
-									echo $mensaje = 'La empresa ha sido creada.';
+									echo $mensaje = 'La empresa ha sido registrada.';
 								break;
 
 								case 'DP':
