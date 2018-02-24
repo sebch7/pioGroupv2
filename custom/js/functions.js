@@ -129,7 +129,7 @@ $('document').ready(function()
 
 	$('#nuevoInsumo').click(function()
 	{
-		var titulo = ['Nombre','Fecha Inicio','Cantidad','','Granja'];
+		var titulo = ['Nombre','Fecha Inicio','Cantidad','Medida','Granja'];
 		var campo = ['r_nombre','rd_fechaInicio','rn_cantidad','rs_idTipoCantidad','rs_idGranja'];
 		var formulario = 'new_supply';
 		$('#container-modal-title').html('<h2>Nuevo Insumo</h2>');
