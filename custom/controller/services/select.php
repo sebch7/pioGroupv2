@@ -4,6 +4,22 @@
 
 	switch ($_REQUEST['accion']) {
 
+
+
+		case 'cargarComunicacionDocente':
+			$arrayUser=array();
+
+			$resultado = $db->consulta('tipoNovedad.nombre as novedad,novedad.informacion,novedad.fechaCreacion,CONCAT(Empleado.primerNombre," ",Empleado.primerApellido) as docente','novedad LEFT JOIN Empleado ON Empleado.identificacion = novedad.idEmpleado LEFT JOIN tipoNovedad ON tipoNovedad.id = Novedad.idTipoNovedad','Novedad.idEmpleado = '.$_SESSION['usuario']);
+			
+			while($_cap=mysqli_fetch_assoc($resultado)) 
+			{
+				$arrayUser[]=$_cap;
+			}
+
+			echo json_encode($arrayUser);
+		break;
+
+
 		case 'consultaUsuriosEmpresas':
 
 			$arrayUser=array();

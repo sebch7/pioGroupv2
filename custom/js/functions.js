@@ -607,6 +607,51 @@ $('document').ready(function()
 	  });
 	}
 
+	function cargarComunicacionesDocente()
+	{
+		alert('s');
+		$('#comunicacionDocente').html('cargando...');//ciudad
+		/*
+		datosComunicacionDocente = '';
+
+		$.ajax({
+		  method: "POST",
+		  dataType: 'json',
+		  url: "../controller/services/select.php",
+		  data: {accion: 'cargarComunicacionDocente'}
+		}).done(function(data) {
+			alert(data.length);
+    	if(data.length >= 1)
+    	{
+		    for(var i = 0; i < data.length; i++)
+		    {
+		    	datosComunicacionDocente += '<div class="demo-card-square mdl-card mdl-shadow--4dp">';
+	          datosComunicacionDocente += '<div class="mdl-card__title mdl-card--expand">';
+	            datosComunicacionDocente += '<h2 class="mdl-card__title-text">Citacion de padre</h2>';
+	          datosComunicacionDocente += '</div>';
+	          datosComunicacionDocente += '<div class="mdl-card__supporting-text">';
+	            datosComunicacionDocente += '<small>Docente: Sebastian chaparro</small>';
+	            datosComunicacionDocente += '<br>';
+	            datosComunicacionDocente += 'Duis sollicitudin sem id magna sagittis, et accumsan mauris suscipit. Sed eget turpis in justo porttitor egestas. Pellentesque ut sem in nunc suscipit imperdiet eget ac magna. Fusce nec augue placerat, ornare erat in, pretium libero. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur egestas mollis ipsum, sit amet posuere risus imperdiet non. Morbi sit amet turpis nibh. Suspendisse accumsan nisi libero, non mattis erat ullamcorper id. Sed blandit turpis ipsum, at eleifend erat tempus in.';
+	          datosComunicacionDocente += '</div>';
+	        datosComunicacionDocente += '</div>';
+	    	}
+	    }
+    	else
+    	{
+    		datosComunicacionDocente = '<div class="android-section-title mdl-typography--display-1-color-contrast">No tienes comunicaciones.</div>';
+    	}
+	    $('#comunicacionDocente').html(datosComunicacionDocente);
+		})
+		.fail(function(data) {
+	    
+	  })
+	  	.always(function() {
+	    	
+	  });
+	  */
+	}
+
 	function mostrarTablaUsuariosEmpresas()
 	{
 		var table =  $('#example').DataTable(
@@ -1083,7 +1128,7 @@ $('document').ready(function()
             "targets": 6,
             "data": "id",
             "render": function(data) {
-              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+              return "<span data-accion='editar' data-emco='"+data+"' class='material-icons editForm'>create</span><span class='material-icons' data-accion='lista' data-emco='"+data+"'>list</span>";
             },
         }],
         
@@ -1095,20 +1140,53 @@ $('document').ready(function()
 
 		$('#example tbody').on( 'click', 'span', function () {
 		  var dialog = document.querySelector('dialog');
-			formEditarGalpon ($(this).data('emco'));
-			dialogPolyfill.registerDialog(dialog);
-			dialog.showModal();
-			var showDialogButton = document.querySelector('span');
-			if (dialog.showModal) {
-			  dialogPolyfill.registerDialog(dialog);
-			}
-			showDialogButton.addEventListener('click', function() {
-			  dialog.showModal();
-			});
-			dialog.querySelector('.close').addEventListener('click', function() {
-			  dialog.close();
-			});
+
+		  	if($(this).data('action') == 'lista')
+		  	{
+		  		alert('lista');
+		  		//checklistEquipos();
+		  		dialogPolyfill.registerDialog(dialog);
+				dialog.showModal();
+				var showDialogButton = document.querySelector('span');
+				if (dialog.showModal) {
+				  dialogPolyfill.registerDialog(dialog);
+				}
+				showDialogButton.addEventListener('click', function() {
+				  dialog.showModal();
+				});
+				dialog.querySelector('.close').addEventListener('click', function() {
+				  dialog.close();
+				});
+		  	}
+		  	else if($(this).data('action') == 'editar')
+		  	{
+		  		alert('editar');
+				//formEditarGalpon($(this).data('emco'));
+				dialogPolyfill.registerDialog(dialog);
+				dialog.showModal();
+				var showDialogButton = document.querySelector('span');
+				if (dialog.showModal) {
+				  dialogPolyfill.registerDialog(dialog);
+				}
+				showDialogButton.addEventListener('click', function() {
+				  dialog.showModal();
+				});
+				dialog.querySelector('.close').addEventListener('click', function() {
+				  dialog.close();
+				});
+		  	}
 		});
+	}
+
+	function checklistEquipos()
+	{
+		alert('entro');
+		var titulo = ['Nombre','Granja','Clima','Capacidad','Estado',''];
+		var campo = ['r_nombre','rs_idGranja','rs_idTipoClima','n_capacidad','rs_idEstado','rh_idGalpon'];
+		var formulario = 'new_listCheck';
+		$('#container-modal-title').html('<h2>'+accionFormulario(formulario)+' lista de chequeo</h2>');
+
+		formNuevo(titulo,campo,formulario);
 	}
 
 	function accionFormulario(formulario)
