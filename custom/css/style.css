@@ -76,7 +76,7 @@ input,button,span,div
 #container-modal-content
 {
 	//max-height: 300px;
-	overflow: scroll;
+	overflow: none;
 }
 header
 { 

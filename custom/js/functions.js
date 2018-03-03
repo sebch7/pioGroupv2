@@ -167,6 +167,26 @@ $('document').ready(function()
 	    });
 	});
 
+	$('#nuevoLote').click(function()
+	{
+		var titulo = ['','fecha de Ingreso','fecha de Salida','Nit del Proveedor','cantidad de Machos','cantidad de Hembras','Tipo de Embarque','','Nombre del transportador','Observaciones'];
+		var campo = ['rs_idlote','rd_fechaIngreso','rd_fechaSalida','ls_idProveedor','rn_cantidadMachos','rn_cantidadHembras','r_tipoEmbarque','r_nombreTransportador','r_observaciones'];
+		var formulario = 'new_lote';
+		$('#container-modal-title').html('<h2>Nuevo Lote</h2>');
+		formNuevo(titulo,campo,formulario);
+
+		var dialog = document.querySelector('dialog');
+		dialogPolyfill.registerDialog(dialog);
+		dialog.showModal();
+	    var showDialogButton = document.querySelector('#nuevoLote');
+	    if (! dialog.showModal) {
+	      dialogPolyfill.registerDialog(dialog);
+	    }
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
+	});
+
 
 });
 
