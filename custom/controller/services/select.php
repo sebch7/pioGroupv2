@@ -33,6 +33,35 @@
 
 			echo json_encode($arrayUser);
 		break;
+
+		case 'cargarProveedores':
+
+			$arrayUser=array();
+
+			$resultado = $db->consulta('nombre,identificacion as id','proveedor','idEmpresa = '.$_SESSION['empresa']);
+			
+			while($_cap=mysqli_fetch_assoc($resultado)) 
+			{
+				$arrayUser[]=$_cap;
+			}
+
+			echo json_encode($arrayUser);
+		break;
+
+		case 'cargarTipoEmbarque':
+
+			$arrayUser=array();
+
+			$resultado = $db->consulta('nombre,id','tipoEmbarque','1');
+			
+			while($_cap=mysqli_fetch_assoc($resultado)) 
+			{
+				$arrayUser[]=$_cap;
+			}
+
+			echo json_encode($arrayUser);
+		break;
+
 		case 'consultaUsurios':
 
 			$consultaExtra = '';
@@ -452,7 +481,7 @@
 		case 'cargarMenu':
 			$arrayUser=array();
 			//consulta los usuarios de una empresa
-			$resultado = $db->consulta('Menu.nombre as nombre,Menu.enlace as enlace,Menu.img as img','MenuPerfil INNER JOIN Menu ON Menu.id = MenuPerfil.idMenu','idPerfil = '.$_SESSION['idPerfil'].' ORDER BY id ASC');
+			$resultado = $db->consulta('Menu.nombre as nombre,Menu.enlace as enlace,Menu.img as img','MenuPerfil INNER JOIN Menu ON Menu.id = MenuPerfil.idMenu','idPerfil = '.$_SESSION['idPerfil'].' ORDER BY menu.orden ASC');
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{

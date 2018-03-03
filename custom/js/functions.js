@@ -169,8 +169,8 @@ $('document').ready(function()
 
 	$('#nuevoLote').click(function()
 	{
-		var titulo = ['','fecha de Ingreso','fecha de Salida','Nit del Proveedor','cantidad de Machos','cantidad de Hembras','Tipo de Embarque','','Nombre del transportador','Observaciones'];
-		var campo = ['rs_idlote','rd_fechaIngreso','rd_fechaSalida','ls_idProveedor','rn_cantidadMachos','rn_cantidadHembras','r_tipoEmbarque','r_nombreTransportador','r_observaciones'];
+		var titulo = ['Proveedor','Cantidad macho','cantidad Hembras','mortandad','Embarque'];
+		var campo = ['rs_idProveedor','rn_macho','rn_hembra','rn_mortandad','rs_idTipoEmbarque'];
 		var formulario = 'new_lote';
 		$('#container-modal-title').html('<h2>Nuevo Lote</h2>');
 		formNuevo(titulo,campo,formulario);
@@ -444,6 +444,60 @@ $('document').ready(function()
 	    	
 	  });
 	}
+
+	
+	function cargarProveedores()
+	{
+		$('#idProveedor').html('cargando...');
+
+		datosProveedor = '';
+
+		$.ajax({
+		  method: "POST",
+		  dataType: 'json',
+		  url: "../controller/services/select.php",
+		  data: {accion: 'cargarProveedores'}
+		}).done(function(data) {
+		    for(var i = 0; i < data.length; i++)
+		    {
+		    	datosProveedor += '<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
+		    }
+		    $('#idProveedor').html(datosProveedor);
+		})
+		.fail(function(data) {
+	    
+	  })
+	  	.always(function() {
+	    	
+	  });
+	}
+
+	function cargarTipoEmbarque()
+	{
+		$('#idTipoEmbarque').html('cargando...');
+
+		datosEmbarque = '';
+
+		$.ajax({
+		  method: "POST",
+		  dataType: 'json',
+		  url: "../controller/services/select.php",
+		  data: {accion: 'cargarTipoEmbarque'}
+		}).done(function(data) {
+		    for(var i = 0; i < data.length; i++)
+		    {
+		    	datosEmbarque += '<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
+		    }
+		    $('#idTipoEmbarque').html(datosEmbarque);
+		})
+		.fail(function(data) {
+	    
+	  })
+	  	.always(function() {
+	    	
+	  });
+	}
+
 
 	function cargarGenero()
 	{
@@ -1346,7 +1400,7 @@ $('document').ready(function()
 				case 'i':
 					//pintarForm += '<input class="mdl-textfield__input" type="input" id="'+campo+'" name="'+campo+'">';
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
-					    pintarForm += '<input class="mdl-textfield__input" type="input" id="'+campo+'" name="'+campo+'">';
+					    pintarForm += '<input class="mdl-textfield__input" type="input" id="'+campo+'" name="'+campo+'" placeholder="Ingrese texto aqui...">';
 					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
@@ -1357,13 +1411,27 @@ $('document').ready(function()
 				break;
 				case 'n':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
-					    pintarForm += '<input class="mdl-textfield__input" type="number" id="'+campo+'" name="'+campo+'">';
+					    pintarForm += '<input class="mdl-textfield__input" type="number" id="'+campo+'" name="'+campo+'" placeholder="Solo numeros">';
 					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
 				case 'd':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
 					    pintarForm += '<input class="mdl-textfield__input" type="date" id="'+campo+'" name="'+campo+'">';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					  pintarForm += '</div>';
+				break;
+
+				case 'dt':
+					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
+					    pintarForm += '<input class="mdl-textfield__input" type="datetime-local" id="'+campo+'" name="'+campo+'">';
+					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
+					  pintarForm += '</div>';
+				break;
+
+				case 'rdt':
+					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
+					    pintarForm += '<input class="mdl-textfield__input" type="datetime-local" id="'+campo+'" name="'+campo+'" required="required">';
 					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
@@ -1376,7 +1444,7 @@ $('document').ready(function()
 				break;
 				case 'rn':
 					pintarForm += '<div class="mdl-textfield mdl-js-textfield">';
-					    pintarForm += '<input class="mdl-textfield__input" type="number" id="'+campo+'" name="'+campo+'" min="0" required>';
+					    pintarForm += '<input class="mdl-textfield__input" type="number" id="'+campo+'" name="'+campo+'" min="0" required placeholder="Solo numeros">';
 					    //pintarForm += '<label class="mdl-textfield__label" for="sample1">Text...</label>';
 					  pintarForm += '</div>';
 				break;
@@ -1442,6 +1510,8 @@ $('document').ready(function()
 
 	function cargarFunciones()
 	{
+		cargarTipoEmbarque();
+		cargarProveedores();
 		cargarPaises();
 		cargarEps();
 		cargarTipoDocumento();
@@ -1552,10 +1622,10 @@ $('document').ready(function()
 		  url: "../controller/services/select.php",
 		  data: {accion: 'cargarMenu'}
 		}).done(function(data) {
-			datosMenuPrincipal += '<a class="mdl-navigation__link" href="home.php">Inicio</a>';
+			datosMenuPrincipal += '<a class="mdl-navigation__link" href="home.php"><i class="material-icons">menu</i>&nbsp;&nbsp;Inicio</a>';
 		    for(var i = 0; i < data.length; i++)
 		    {
-		    	datosMenuPrincipal += '<a class="mdl-navigation__link" href="'+data[i].enlace+'.php">'+data[i].nombre+'</a>';
+		    	datosMenuPrincipal += '<a class="mdl-navigation__link" href="'+data[i].enlace+'.php"><i class="material-icons">'+data[i].img+'</i>&nbsp;&nbsp;'+data[i].nombre+'</a>';
 		    }
 		    $('#menuPrincipal').html(datosMenuPrincipal);
 		})

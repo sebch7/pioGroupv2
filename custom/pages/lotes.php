@@ -42,15 +42,15 @@
 				</div>
 				<table id="example" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 					<thead id="tablaInfoHead">
-						<th>id Lote</th>
+						<th>id</th>
 						<th>Fecha de Ingreso</th>
 						<th>Fecha de Salida</th>
 						<th>Proveedor</th>
-						<th>Machos</th>
-						<th>Hembras</th>
-						<th>Tipo de Embarque</th>
-						<th>Transportador</th>
-						<th>Observaciones</th>
+						<!--<th>Machos</th>-->
+						<!--<th>Hembras</th>-->
+						<!--<th>Tipo de Embarque</th>-->
+						<!--<th>Transportador</th>-->
+						<!--<th>Observaciones</th>-->
 					</thead>
 			</table>
 			</div>
