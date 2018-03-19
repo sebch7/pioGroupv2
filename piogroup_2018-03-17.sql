@@ -1,13 +1,13 @@
-# ************************************************************
+﻿# ************************************************************
 # Sequel Pro SQL dump
 # Versión 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.5.5-10.1.16-MariaDB)
-# Base de datos: pioGroup
-# Tiempo de Generación: 2017-09-20 15:32:46 +0000
+# Host: 127.0.0.1 (MySQL 5.5.5-10.1.30-MariaDB)
+# Base de datos: piogroup
+# Tiempo de Generación: 2018-03-17 12:49:41 +0000
 # ************************************************************
 
 
@@ -20,22 +20,20 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Volcado de tabla AdministradoraEps
+# Volcado de tabla administradoraeps
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `AdministradoraEps`;
-
-CREATE TABLE `AdministradoraEps` (
+CREATE TABLE `administradoraeps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL DEFAULT '',
   `nit` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `AdministradoraEps` WRITE;
-/*!40000 ALTER TABLE `AdministradoraEps` DISABLE KEYS */;
+LOCK TABLES `administradoraeps` WRITE;
+/*!40000 ALTER TABLE `administradoraeps` DISABLE KEYS */;
 
-INSERT INTO `AdministradoraEps` (`id`, `nombre`, `nit`)
+INSERT INTO `administradoraeps` (`id`, `nombre`, `nit`)
 VALUES
 	(1,'Empresas Publicas de Medellin Departamento Médico','890904996'),
 	(2,'Fondo de Pasivo Social de Ferrocarriles','800112806'),
@@ -60,25 +58,23 @@ VALUES
 	(21,'Multimedicas Salud Con Calidad EPS S.A.','900112778'),
 	(22,'Golden Group EPS','900074992');
 
-/*!40000 ALTER TABLE `AdministradoraEps` ENABLE KEYS */;
+/*!40000 ALTER TABLE `administradoraeps` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Ciudad
+# Volcado de tabla ciudad
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Ciudad`;
-
-CREATE TABLE `Ciudad` (
+CREATE TABLE `ciudad` (
   `id` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Ciudad` WRITE;
-/*!40000 ALTER TABLE `Ciudad` DISABLE KEYS */;
+LOCK TABLES `ciudad` WRITE;
+/*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
 
-INSERT INTO `Ciudad` (`id`, `nombre`)
+INSERT INTO `ciudad` (`id`, `nombre`)
 VALUES
 	(5001,'medellín'),
 	(5004,'abriaquí'),
@@ -648,16 +644,14 @@ VALUES
 	(25898,'zipacón'),
 	(25899,'zipaquirá');
 
-/*!40000 ALTER TABLE `Ciudad` ENABLE KEYS */;
+/*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla CkEquipos
+# Volcado de tabla ckequipos
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `CkEquipos`;
-
-CREATE TABLE `CkEquipos` (
+CREATE TABLE `ckequipos` (
   `id` int(11) NOT NULL,
   `fechaLista` int(11) DEFAULT NULL,
   `idGalpon` int(11) NOT NULL,
@@ -677,12 +671,10 @@ CREATE TABLE `CkEquipos` (
 
 
 
-# Volcado de tabla CkInstalacion
+# Volcado de tabla ckinstalacion
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `CkInstalacion`;
-
-CREATE TABLE `CkInstalacion` (
+CREATE TABLE `ckinstalacion` (
   `id` int(11) NOT NULL,
   `fechaLista` date NOT NULL,
   `idGalpon` int(11) NOT NULL,
@@ -697,18 +689,16 @@ CREATE TABLE `CkInstalacion` (
   KEY `fk_ckInstalacion_Galpon1_idx` (`idGalpon`),
   KEY `fk_ckInstalacion_tipoTecho1_idx` (`idTipoTecho`),
   KEY `fk_ckInstalacion_tipoPiso1_idx` (`idTipoPiso`),
-  CONSTRAINT `fk_ckInstalacion_tipoPiso1` FOREIGN KEY (`idTipoPiso`) REFERENCES `TipoPiso` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_ckInstalacion_tipoTecho1` FOREIGN KEY (`idTipoTecho`) REFERENCES `TipoTecho` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_ckInstalacion_tipoPiso1` FOREIGN KEY (`idTipoPiso`) REFERENCES `tipopiso` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_ckInstalacion_tipoTecho1` FOREIGN KEY (`idTipoTecho`) REFERENCES `tipotecho` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-# Volcado de tabla CkPreparacionGalpon
+# Volcado de tabla ckpreparaciongalpon
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `CkPreparacionGalpon`;
-
-CREATE TABLE `CkPreparacionGalpon` (
+CREATE TABLE `ckpreparaciongalpon` (
   `id` int(11) NOT NULL,
   `idGalpon` int(11) NOT NULL,
   `ceboRoedor` int(11) DEFAULT NULL,
@@ -735,24 +725,22 @@ CREATE TABLE `CkPreparacionGalpon` (
 
 
 
-# Volcado de tabla Departamento
+# Volcado de tabla departamento
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Departamento`;
-
-CREATE TABLE `Departamento` (
+CREATE TABLE `departamento` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL DEFAULT '',
   `idPais` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Departamento_Pais1_idx` (`idPais`),
-  CONSTRAINT `fk_Departamento_Pais1` FOREIGN KEY (`idPais`) REFERENCES `Pais` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Departamento_Pais1` FOREIGN KEY (`idPais`) REFERENCES `pais` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Departamento` WRITE;
-/*!40000 ALTER TABLE `Departamento` DISABLE KEYS */;
+LOCK TABLES `departamento` WRITE;
+/*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
 
-INSERT INTO `Departamento` (`id`, `nombre`, `idPais`)
+INSERT INTO `departamento` (`id`, `nombre`, `idPais`)
 VALUES
 	(5,'Antioquia',57),
 	(8,'Atlantico',57),
@@ -787,16 +775,14 @@ VALUES
 	(97,'Vaupés',57),
 	(99,'Vichada',57);
 
-/*!40000 ALTER TABLE `Departamento` ENABLE KEYS */;
+/*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Empleado
+# Volcado de tabla empleado
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Empleado`;
-
-CREATE TABLE `Empleado` (
+CREATE TABLE `empleado` (
   `identificacion` bigint(20) NOT NULL,
   `primerNombre` varchar(20) NOT NULL DEFAULT '',
   `segundoNombre` varchar(20) DEFAULT '',
@@ -827,35 +813,34 @@ CREATE TABLE `Empleado` (
   KEY `fk_Empleado_Departamento1_idx` (`idDepartamento`),
   KEY `fk_Empleados_Ciudad1_idx` (`idCiudad`),
   KEY `fk_Empleado_Empresa` (`idEmpresa`),
-  CONSTRAINT `fk_Administradora1` FOREIGN KEY (`idAdministradoraEps`) REFERENCES `AdministradoraEps` (`id`),
-  CONSTRAINT `fk_Empleado_Ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `Ciudad` (`id`),
-  CONSTRAINT `fk_Empleado_Departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`),
-  CONSTRAINT `fk_Empleado_Empresa` FOREIGN KEY (`idEmpresa`) REFERENCES `Empresa` (`id`),
-  CONSTRAINT `fk_Empleado_Estado` FOREIGN KEY (`idEstado`) REFERENCES `Estado` (`id`),
-  CONSTRAINT `fk_Empleado_Genero` FOREIGN KEY (`idGenero`) REFERENCES `Genero` (`id`),
-  CONSTRAINT `fk_Empleado_Pais` FOREIGN KEY (`idPais`) REFERENCES `Pais` (`id`),
-  CONSTRAINT `fk_Empleado_TipoDocumento` FOREIGN KEY (`idTipoDocumento`) REFERENCES `TipoDocumento` (`id`)
+  CONSTRAINT `fk_Administradora1` FOREIGN KEY (`idAdministradoraEps`) REFERENCES `administradoraeps` (`id`),
+  CONSTRAINT `fk_Empleado_Ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `ciudad` (`id`),
+  CONSTRAINT `fk_Empleado_Departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamento` (`id`),
+  CONSTRAINT `fk_Empleado_Empresa` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`),
+  CONSTRAINT `fk_Empleado_Estado` FOREIGN KEY (`idEstado`) REFERENCES `estado` (`id`),
+  CONSTRAINT `fk_Empleado_Genero` FOREIGN KEY (`idGenero`) REFERENCES `genero` (`id`),
+  CONSTRAINT `fk_Empleado_Pais` FOREIGN KEY (`idPais`) REFERENCES `pais` (`id`),
+  CONSTRAINT `fk_Empleado_TipoDocumento` FOREIGN KEY (`idTipoDocumento`) REFERENCES `tipodocumento` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Empleado` WRITE;
-/*!40000 ALTER TABLE `Empleado` DISABLE KEYS */;
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
 
-INSERT INTO `Empleado` (`identificacion`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `telefonoCelular`, `telefonoFijo`, `direccion`, `fechaNacimiento`, `idTipoDocumento`, `idAdministradoraEps`, `idCiudad`, `idGenero`, `idPais`, `idEstado`, `idDepartamento`, `idEmpresa`, `fechaCreacion`, `idGranja`, `correoElectronico`)
+INSERT INTO `empleado` (`identificacion`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `telefonoCelular`, `telefonoFijo`, `direccion`, `fechaNacimiento`, `idTipoDocumento`, `idAdministradoraEps`, `idCiudad`, `idGenero`, `idPais`, `idEstado`, `idDepartamento`, `idEmpresa`, `fechaCreacion`, `idGranja`, `correoElectronico`)
 VALUES
-	(12345,'admin','','admin','','','4502134','Pio Group','2017-01-06',1,7,11001,1,57,1,11,1,'0000-00-00',14,''),
-	(123456789,'carlos','','alfonso','','','4443332','calle 43 # 44 - 32','2017-08-31',1,6,11001,1,57,2,11,3,'2017-08-31',0,''),
-	(1022399551,'Sebastián','Camilo','Chaparro','Benavides','3168642973','4502134','Cra 80 # 54 A 77 Sur','1994-12-08',1,7,11001,1,57,1,11,1,'2017-09-17',0,'sebass7@live.com');
+	(76543,'qwertyu','wert','erty','dfgh','345678','23456','dfsfd 6543','2018-02-16',1,2,5004,2,57,1,5,7,'2018-02-16',0,''),
+	(765432,'nombre','segundo','apellido','apellidos','15431','65342','765432q','2018-12-31',2,3,8137,2,57,2,81,7,'2018-02-16',0,''),
+	(453423412,'qwertytre','ytre','hgfdsa','fgfdg','567','45678','876543hgdg','2018-01-31',1,3,5004,1,57,1,5,1,'2018-02-16',0,''),
+	(1022399551,'Sebastian','','Chaparro','','3168642973','4502134','cra 80 f # 54 a 77','1994-12-08',2,1,11001,1,57,1,11,1,'2018-02-03',0,'sebass7@live.com');
 
-/*!40000 ALTER TABLE `Empleado` ENABLE KEYS */;
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Empresa
+# Volcado de tabla empresa
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Empresa`;
-
-CREATE TABLE `Empresa` (
+CREATE TABLE `empresa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
   `nit` varchar(20) DEFAULT '',
@@ -873,54 +858,50 @@ CREATE TABLE `Empresa` (
   KEY `fk_Empresa_Ciudad` (`idCiudad`),
   KEY `fk_Empresa_Estado` (`idEstado`),
   KEY `fk_Empresa_PlanComercial` (`idPlanComercial`),
-  CONSTRAINT `fk_Empresa_Ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `Ciudad` (`id`),
-  CONSTRAINT `fk_Empresa_Departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`),
-  CONSTRAINT `fk_Empresa_Estado` FOREIGN KEY (`idEstado`) REFERENCES `Estado` (`id`),
-  CONSTRAINT `fk_Empresa_Pais` FOREIGN KEY (`idPais`) REFERENCES `Pais` (`id`),
-  CONSTRAINT `fk_Empresa_PlanComercial` FOREIGN KEY (`idPlanComercial`) REFERENCES `PlanComercial` (`id`)
+  CONSTRAINT `fk_Empresa_Ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `ciudad` (`id`),
+  CONSTRAINT `fk_Empresa_Departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamento` (`id`),
+  CONSTRAINT `fk_Empresa_Estado` FOREIGN KEY (`idEstado`) REFERENCES `estado` (`id`),
+  CONSTRAINT `fk_Empresa_Pais` FOREIGN KEY (`idPais`) REFERENCES `pais` (`id`),
+  CONSTRAINT `fk_Empresa_PlanComercial` FOREIGN KEY (`idPlanComercial`) REFERENCES `plancomercial` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Empresa` WRITE;
-/*!40000 ALTER TABLE `Empresa` DISABLE KEYS */;
+LOCK TABLES `empresa` WRITE;
+/*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
 
-INSERT INTO `Empresa` (`id`, `nombre`, `nit`, `telefono`, `personaResponsable`, `idPais`, `idDepartamento`, `idCiudad`, `idEstado`, `idPlanComercial`, `fechaCreacion`)
+INSERT INTO `empresa` (`id`, `nombre`, `nit`, `telefono`, `personaResponsable`, `idPais`, `idDepartamento`, `idCiudad`, `idEstado`, `idPlanComercial`, `fechaCreacion`)
 VALUES
-	(1,'Pio Group Inc','123456789-2','316233443','Pio Group',57,11,11001,1,1,'2017-08-20'),
-	(3,'Carlos Alfonso y Co.','79270751','450234','Fernando Cañas',57,8,8141,1,1,'2017-08-31');
+	(1,'admin','1','333','admin',57,11,11001,1,1,'1994-12-08'),
+	(7,'qwertyu','765432','56789','ertyui',57,5,5001,1,1,'2018-02-16');
 
-/*!40000 ALTER TABLE `Empresa` ENABLE KEYS */;
+/*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Estado
+# Volcado de tabla estado
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Estado`;
-
-CREATE TABLE `Estado` (
+CREATE TABLE `estado` (
   `id` int(11) NOT NULL,
   `nombre` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Estado` WRITE;
-/*!40000 ALTER TABLE `Estado` DISABLE KEYS */;
+LOCK TABLES `estado` WRITE;
+/*!40000 ALTER TABLE `estado` DISABLE KEYS */;
 
-INSERT INTO `Estado` (`id`, `nombre`)
+INSERT INTO `estado` (`id`, `nombre`)
 VALUES
 	(1,'Activo'),
 	(2,'Desactivado');
 
-/*!40000 ALTER TABLE `Estado` ENABLE KEYS */;
+/*!40000 ALTER TABLE `estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Galpon
+# Volcado de tabla galpon
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Galpon`;
-
-CREATE TABLE `Galpon` (
+CREATE TABLE `galpon` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
   `idGranja` int(11) NOT NULL,
@@ -933,56 +914,48 @@ CREATE TABLE `Galpon` (
   KEY `fk_Galpon_Granja1_idx` (`idGranja`),
   KEY `fk_Galpon_Estado` (`idEstado`),
   KEY `fk_Galpon_TipoClima` (`idTipoClima`),
-  CONSTRAINT `fk_Galpon_Estado` FOREIGN KEY (`idEstado`) REFERENCES `Estado` (`id`),
-  CONSTRAINT `fk_Galpon_Granja` FOREIGN KEY (`idGranja`) REFERENCES `Granja` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Galpon_TipoClima` FOREIGN KEY (`idTipoClima`) REFERENCES `TipoClima` (`id`)
+  CONSTRAINT `fk_Galpon_Estado` FOREIGN KEY (`idEstado`) REFERENCES `estado` (`id`),
+  CONSTRAINT `fk_Galpon_Granja` FOREIGN KEY (`idGranja`) REFERENCES `granja` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Galpon_TipoClima` FOREIGN KEY (`idTipoClima`) REFERENCES `tipoclima` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Galpon` WRITE;
-/*!40000 ALTER TABLE `Galpon` DISABLE KEYS */;
+LOCK TABLES `galpon` WRITE;
+/*!40000 ALTER TABLE `galpon` DISABLE KEYS */;
 
-INSERT INTO `Galpon` (`id`, `nombre`, `idGranja`, `idTipoClima`, `capacidad`, `disponibilidad`, `idEstado`, `fechaCreacion`)
+INSERT INTO `galpon` (`id`, `nombre`, `idGranja`, `idTipoClima`, `capacidad`, `disponibilidad`, `idEstado`, `fechaCreacion`)
 VALUES
-	(7,'galpon 1',20,2,1000,1000,1,'2017-08-31'),
-	(8,'galpon 2',20,1,3000,3000,1,'2017-08-31'),
-	(9,'galpon de prueba 1',22,1,1000,1000,1,'2017-09-11'),
-	(10,'galpon de prueba 2',22,2,1500,1500,1,'2017-09-11'),
-	(11,'galpon de prueba 3',23,3,1000,1000,1,'2017-09-11'),
-	(13,'galpon de prueba 2 m',23,1,3000,3000,1,'2017-09-11');
+	(14,'galpon 2',24,1,1000,1000,1,'2018-02-07'),
+	(15,'galpon 1',24,1,2000,1000,2,'2018-02-11');
 
-/*!40000 ALTER TABLE `Galpon` ENABLE KEYS */;
+/*!40000 ALTER TABLE `galpon` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Genero
+# Volcado de tabla genero
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Genero`;
-
-CREATE TABLE `Genero` (
+CREATE TABLE `genero` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Genero` WRITE;
-/*!40000 ALTER TABLE `Genero` DISABLE KEYS */;
+LOCK TABLES `genero` WRITE;
+/*!40000 ALTER TABLE `genero` DISABLE KEYS */;
 
-INSERT INTO `Genero` (`id`, `nombre`)
+INSERT INTO `genero` (`id`, `nombre`)
 VALUES
 	(1,'Masculino'),
 	(2,'Femenino');
 
-/*!40000 ALTER TABLE `Genero` ENABLE KEYS */;
+/*!40000 ALTER TABLE `genero` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Granja
+# Volcado de tabla granja
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Granja`;
-
-CREATE TABLE `Granja` (
+CREATE TABLE `granja` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
@@ -997,33 +970,29 @@ CREATE TABLE `Granja` (
   KEY `fk_Granja_Ciudad1_idx` (`idCiudad`),
   KEY `fk_Departamento` (`idDepartamento`),
   KEY `fk_Estado` (`idEstado`),
-  CONSTRAINT `fk_Ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `Ciudad` (`id`),
-  CONSTRAINT `fk_Departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `Departamento` (`id`),
-  CONSTRAINT `fk_Empresa` FOREIGN KEY (`idEmpresa`) REFERENCES `Empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Estado` FOREIGN KEY (`idEstado`) REFERENCES `Estado` (`id`),
-  CONSTRAINT `fk_Pais` FOREIGN KEY (`idPais`) REFERENCES `Pais` (`id`)
+  CONSTRAINT `fk_Ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `ciudad` (`id`),
+  CONSTRAINT `fk_Departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamento` (`id`),
+  CONSTRAINT `fk_Empresa` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Estado` FOREIGN KEY (`idEstado`) REFERENCES `estado` (`id`),
+  CONSTRAINT `fk_Pais` FOREIGN KEY (`idPais`) REFERENCES `pais` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Granja` WRITE;
-/*!40000 ALTER TABLE `Granja` DISABLE KEYS */;
+LOCK TABLES `granja` WRITE;
+/*!40000 ALTER TABLE `granja` DISABLE KEYS */;
 
-INSERT INTO `Granja` (`id`, `nombre`, `idEmpresa`, `idPais`, `idDepartamento`, `idCiudad`, `idEstado`, `fechaCreacion`)
+INSERT INTO `granja` (`id`, `nombre`, `idEmpresa`, `idPais`, `idDepartamento`, `idCiudad`, `idEstado`, `fechaCreacion`)
 VALUES
-	(20,'granja 1',3,57,8,8001,1,'2017-08-31'),
-	(21,'granja 2',3,57,17,17001,1,'2017-08-31'),
-	(22,'Granja de prueba pio',1,57,11,11001,2,'2017-09-11'),
-	(23,'granja de prueba 2',1,57,5,5001,1,'2017-09-11');
+	(24,'granja 1',1,57,11,11001,1,'2018-02-07'),
+	(25,'prueba',1,57,81,8137,1,'2018-03-10');
 
-/*!40000 ALTER TABLE `Granja` ENABLE KEYS */;
+/*!40000 ALTER TABLE `granja` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Historial
+# Volcado de tabla historial
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Historial`;
-
-CREATE TABLE `Historial` (
+CREATE TABLE `historial` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` datetime DEFAULT NULL,
   `modulo` varchar(45) DEFAULT NULL,
@@ -1034,48 +1003,54 @@ CREATE TABLE `Historial` (
   `idEmpleado` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Historial_Empleado1_idx` (`idEmpleado`),
-  CONSTRAINT `fk_Historial_Empleado` FOREIGN KEY (`idEmpleado`) REFERENCES `Empleado` (`identificacion`)
+  CONSTRAINT `fk_Historial_Empleado` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`identificacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Historial` WRITE;
-/*!40000 ALTER TABLE `Historial` DISABLE KEYS */;
+LOCK TABLES `historial` WRITE;
+/*!40000 ALTER TABLE `historial` DISABLE KEYS */;
 
-INSERT INTO `Historial` (`id`, `fecha`, `modulo`, `tabla`, `accion`, `textoAnterior`, `textoNuevo`, `idEmpleado`)
+INSERT INTO `historial` (`id`, `fecha`, `modulo`, `tabla`, `accion`, `textoAnterior`, `textoNuevo`, `idEmpleado`)
 VALUES
-	(40,'2017-08-31 08:18:29','Empresas','Empresa','Nueva Empresa','','Carlos Alfonso y Co.',12345),
-	(41,'2017-08-31 08:19:37','UsuariosEmpresa','Usuario','Nuevo UsuarioEmpresa','','123456789',12345),
-	(42,'2017-08-31 08:20:20','Granjas','Granja','Nueva Granja','','granja 1',123456789),
-	(43,'2017-08-31 08:20:32','Granjas','Granja','Nueva Granja','','granja 2',123456789),
-	(44,'2017-08-31 08:21:00','Galpones','Galpon','Nuevo Galpon','','galpon 1',123456789),
-	(45,'2017-08-31 08:21:37','Galpones','Galpon','Nuevo Galpon','','galpon 2',123456789),
-	(46,'2017-08-31 08:22:57','Insumos','Insumo','Nuevo Insumo','','Concentrado para engorde',123456789),
-	(47,'2017-09-01 08:42:25','Insumos','Insumo','Nuevo Insumo','','clorox',123456789),
-	(48,'2017-09-11 08:46:33','Granjas','Granja','Nueva Granja','','Granja de prueba pio',12345),
-	(49,'2017-09-11 08:46:51','Galpones','Galpon','Nuevo Galpon','','galpon de prueba 1',12345),
-	(50,'2017-09-11 08:47:04','Galpones','Galpon','Nuevo Galpon','','galpon de prueba 2',12345),
-	(51,'2017-09-11 08:47:22','Galpones','Galpon','Nuevo Galpon','','galpon de prueba 3',12345),
-	(52,'2017-09-11 08:47:38','Granjas','Granja','Nueva Granja','','granja de prueba 2',12345),
-	(53,'2017-09-11 08:47:51','Galpones','Galpon','Nuevo Galpon','','galpon de prueba 1 med',12345),
-	(54,'2017-09-11 08:48:13','Galpones','Galpon','Nuevo Galpon','','galpon de prueba 2 med',12345),
-	(55,'2017-09-11 08:48:21','Galpones','Galpon','Editar Galpon','galpon de prueba 3-22-3-1000-1','galpon de prueba 3-22-3-1000-1',12345),
-	(56,'2017-09-11 08:48:48','Insumos','Insumo','Nuevo Insumo','','agua destilada ',12345),
-	(57,'2017-09-11 08:50:21','Insumos','Insumo','Nuevo Insumo','','clorx',12345),
-	(58,'2017-09-11 08:50:41','Insumos','Insumo','Nuevo Insumo','','agua destilada',12345),
-	(59,'2017-09-16 09:50:41','Granjas','Granja','Editar Granja','Granja de prueba pio-1-1','Granja de prueba pio-1-1',12345),
-	(60,'2017-09-17 06:21:49','Usuarios','Usuario','Nuevo Usuario','','1022399551',12345),
-	(61,'2017-09-17 06:25:03','usuariosEmpresa','Usuario','Editar UsuarioEmpresa','carlos--alfonso---4443332-calle 43 # 44 - 32-6-1-1-3','carlos--alfonso---4443332-calle 43 # 44 - 32-6-1-1-3',12345);
+	(65,'2018-02-07 06:58:40','Granjas','Granja','Nueva Granja','','granja 1',1022399551),
+	(66,'2018-02-07 07:02:35','Galpones','Galpon','Nuevo Galpon','','galpon 1',1022399551),
+	(67,'2018-02-11 02:38:04','Galpones','Galpon','Nuevo Galpon','','galpon 1',1022399551),
+	(68,'2018-02-11 02:42:39','Insumos','Insumo','Nuevo Insumo','','aaaa',1022399551),
+	(69,'2018-02-11 05:42:01','Galpones','Galpon','Editar Galpon','galpon 1-24-1-1000-1','galpon 1-24-1-1000-1',1022399551),
+	(70,'2018-02-12 08:39:50','Empresas','Empresa','Nueva Empresa','','los olivos',1022399551),
+	(71,'2018-02-16 06:11:11','Galpones','Galpon','Editar Galpon','galpon 1-24-1-1000-1','galpon 1-24-1-1000-1',1022399551),
+	(72,'2018-02-16 06:11:40','Galpones','Galpon','Editar Galpon','galpon 1-24-1-1000-2','galpon 1-24-1-1000-2',1022399551),
+	(73,'2018-02-16 06:40:13','Empresas','Empresa','Nueva Empresa','','pio group',1022399551),
+	(74,'2018-02-16 06:41:08','Empresas','Empresa','Nueva Empresa','','qwertyu',1022399551),
+	(75,'2018-02-16 06:41:51','Empresas','Empresa','Nueva Empresa','','qwertyu',1022399551),
+	(76,'2018-02-16 06:42:29','Empresas','Empresa','Nueva Empresa','','qwertyu',1022399551),
+	(77,'2018-02-16 06:42:36','Empresas','Empresa','Editar Empresa','admin-1-0-admin-1','admin-1-0-admin-1',1022399551),
+	(78,'2018-02-16 06:54:49','Usuarios','Usuario','Nuevo Usuario','','76543',1022399551),
+	(79,'2018-02-16 06:54:49','UsuariosEmpresa','Usuario','Nuevo UsuarioEmpresa','','76543',1022399551),
+	(80,'2018-02-16 06:56:36','Usuarios','Usuario','Nuevo Usuario','','765432',1022399551),
+	(81,'2018-02-16 06:56:36','UsuariosEmpresa','Usuario','Nuevo UsuarioEmpresa','','765432',1022399551),
+	(82,'2018-02-16 07:01:36','UsuariosEmpresa','Usuario','Nuevo UsuarioEmpresa','','453423412',1022399551),
+	(83,'2018-02-16 07:09:56','usuariosEmpresa','Usuario','Editar UsuarioEmpresa','qqqqqq-wwwww-eeeee--15431-65342-765432q-3-1-2-1','qqqqqq-wwwww-eeeee--15431-65342-765432q-3-1-2-1',1022399551),
+	(84,'2018-02-16 07:10:18','usuariosEmpresa','Usuario','Editar UsuarioEmpresa','qqqqqq-wwwww-eeeee--15431-65342-765432q-3-1-2-7','qqqqqq-wwwww-eeeee--15431-65342-765432q-3-1-2-7',1022399551),
+	(85,'2018-03-10 08:22:03','insumoGalpon','insumoGalpon','Nuevo Insumo a galpon','','',1022399551),
+	(86,'2018-03-10 08:22:58','insumoGalpon','insumoGalpon','Nuevo Insumo a galpon','','',1022399551),
+	(87,'2018-03-10 08:23:16','insumoGalpon','insumoGalpon','Nuevo Insumo a galpon','','14',1022399551),
+	(88,'2018-03-10 08:24:21','insumoGalpon','insumoGalpon','Nuevo Insumo a galpon','','14',1022399551),
+	(89,'2018-03-10 08:24:40','insumoGalpon','insumoGalpon','Nuevo Insumo a galpon','','14',1022399551),
+	(90,'2018-03-10 08:25:03','insumoGalpon','insumoGalpon','Nuevo Insumo a galpon','','14',1022399551),
+	(91,'2018-03-10 08:33:04','insumoGalpon','insumoGalpon','Nuevo Insumo a galpon','','14',1022399551),
+	(92,'2018-03-10 08:34:35','Insumos','Insumo','Nuevo Insumo','','agua destilada',1022399551),
+	(93,'2018-03-10 09:44:00','Granjas','Granja','Nueva Granja','','prueba',1022399551),
+	(94,'2018-03-10 09:44:31','Usuarios','Usuario','Editar Usuario','qwertytre-ytre-hgfdsa-fgfdg-567-45678-876543hgdg-3-1-0-2','qwertytre-ytre-hgfdsa-fgfdg-567-45678-876543hgdg-3-1-0-2',1022399551);
 
-/*!40000 ALTER TABLE `Historial` ENABLE KEYS */;
+/*!40000 ALTER TABLE `historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Insumo
+# Volcado de tabla insumo
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Insumo`;
-
-CREATE TABLE `Insumo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `insumo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Consecutivo',
   `nombre` varchar(50) NOT NULL DEFAULT '',
   `cantidad` float NOT NULL,
   `idTipoCantidad` int(11) NOT NULL,
@@ -1084,178 +1059,193 @@ CREATE TABLE `Insumo` (
   `fechaCreacion` date NOT NULL,
   `cantidadUsada` float NOT NULL,
   `idGranja` int(11) NOT NULL,
+  `idEstado` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `fk_Insumo_TipoCantidad` (`idTipoCantidad`),
   KEY `fk_Insumo_Granja` (`idGranja`),
-  CONSTRAINT `fk_Insumo_Granja` FOREIGN KEY (`idGranja`) REFERENCES `Granja` (`id`),
-  CONSTRAINT `fk_Insumo_TipoCantidad` FOREIGN KEY (`idTipoCantidad`) REFERENCES `TipoCantidad` (`id`)
+  CONSTRAINT `fk_Insumo_Granja` FOREIGN KEY (`idGranja`) REFERENCES `granja` (`id`),
+  CONSTRAINT `fk_Insumo_TipoCantidad` FOREIGN KEY (`idTipoCantidad`) REFERENCES `tipocantidad` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Insumo` WRITE;
-/*!40000 ALTER TABLE `Insumo` DISABLE KEYS */;
+LOCK TABLES `insumo` WRITE;
+/*!40000 ALTER TABLE `insumo` DISABLE KEYS */;
 
-INSERT INTO `Insumo` (`id`, `nombre`, `cantidad`, `idTipoCantidad`, `fechaInicio`, `fechaFinal`, `fechaCreacion`, `cantidadUsada`, `idGranja`)
+INSERT INTO `insumo` (`id`, `nombre`, `cantidad`, `idTipoCantidad`, `fechaInicio`, `fechaFinal`, `fechaCreacion`, `cantidadUsada`, `idGranja`, `idEstado`)
 VALUES
-	(2,'Concentrado para engorde',5,5,'2017-08-31','0000-00-00','2017-08-31',5,20),
-	(3,'clorox',2,2,'2017-09-01','0000-00-00','2017-09-01',2,21),
-	(4,'agua destilada ',30,2,'2017-09-11','0000-00-00','2017-09-11',30,22),
-	(5,'clorx',20,2,'2017-09-11','0000-00-00','2017-09-11',20,22),
-	(6,'agua destilada',40,2,'2017-09-11','0000-00-00','2017-09-11',40,23);
+	(7,'aaaa',1000,1,'2018-02-11','0000-00-00','2018-02-11',1000,24,2),
+	(8,'agua destilada',300,2,'2018-03-10','0000-00-00','2018-03-10',140,24,1);
 
-/*!40000 ALTER TABLE `Insumo` ENABLE KEYS */;
+/*!40000 ALTER TABLE `insumo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla InsumoGalpon
+# Volcado de tabla insumoGalpon
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `InsumoGalpon`;
-
-CREATE TABLE `InsumoGalpon` (
+CREATE TABLE `insumoGalpon` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idInsumo` int(11) NOT NULL,
   `idGalpon` int(11) NOT NULL,
   `cantidad` float NOT NULL DEFAULT '0',
   `fechaInicio` date NOT NULL,
-  `fechaFinal` date NOT NULL,
+  `fechaFinal` date DEFAULT '0000-00-00',
+  `fechaCreacion` datetime NOT NULL,
+  `idEmpleado` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_InsumoGalpon_Insumo` (`idInsumo`),
   KEY `fk_InsumoGalpon_Galpon` (`idGalpon`),
-  CONSTRAINT `fk_InsumoGalpon_Galpon` FOREIGN KEY (`idGalpon`) REFERENCES `Galpon` (`id`),
-  CONSTRAINT `fk_InsumoGalpon_Insumo` FOREIGN KEY (`idInsumo`) REFERENCES `Insumo` (`id`)
+  KEY `fk_empleado` (`idEmpleado`),
+  CONSTRAINT `fk_InsumoGalpon_Galpon` FOREIGN KEY (`idGalpon`) REFERENCES `galpon` (`id`),
+  CONSTRAINT `fk_InsumoGalpon_Insumo` FOREIGN KEY (`idInsumo`) REFERENCES `insumo` (`id`),
+  CONSTRAINT `fk_empleado` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`identificacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `InsumoGalpon` WRITE;
-/*!40000 ALTER TABLE `InsumoGalpon` DISABLE KEYS */;
+LOCK TABLES `insumoGalpon` WRITE;
+/*!40000 ALTER TABLE `insumoGalpon` DISABLE KEYS */;
 
-INSERT INTO `InsumoGalpon` (`id`, `idInsumo`, `idGalpon`, `cantidad`, `fechaInicio`, `fechaFinal`)
+INSERT INTO `insumoGalpon` (`id`, `idInsumo`, `idGalpon`, `cantidad`, `fechaInicio`, `fechaFinal`, `fechaCreacion`, `idEmpleado`)
 VALUES
-	(1,2,7,2,'2017-09-13','0000-00-00'),
-	(2,3,7,3,'2017-09-13','0000-00-00');
+	(1,7,14,10,'2018-03-10','0000-00-00','2018-03-10 08:24:40',1022399551),
+	(2,7,14,10,'2018-03-10','0000-00-00','2018-03-10 08:25:03',1022399551),
+	(3,7,14,30,'2018-03-11','0000-00-00','2018-03-10 08:33:04',1022399551);
 
-/*!40000 ALTER TABLE `InsumoGalpon` ENABLE KEYS */;
+/*!40000 ALTER TABLE `insumoGalpon` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Menu
+# Volcado de tabla lote
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Menu`;
+CREATE TABLE `lote` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fechaCreacion` datetime NOT NULL,
+  `fechaSalida` datetime DEFAULT '0000-00-00 00:00:00',
+  `cantidadMacho` int(11) DEFAULT '0',
+  `cantidadHembra` int(11) DEFAULT '0',
+  `idProveedor` int(11) unsigned NOT NULL,
+  `idTipoEmbarque` int(11) NOT NULL,
+  `idEmpleado` bigint(11) NOT NULL,
+  `mortandad` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `Menu` (
+
+
+# Volcado de tabla menu
+# ------------------------------------------------------------
+
+CREATE TABLE `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL DEFAULT '',
   `enlace` varchar(255) NOT NULL DEFAULT '',
   `img` varchar(50) NOT NULL DEFAULT '',
+  `orden` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Menu` WRITE;
-/*!40000 ALTER TABLE `Menu` DISABLE KEYS */;
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
 
-INSERT INTO `Menu` (`id`, `nombre`, `enlace`, `img`)
+INSERT INTO `menu` (`id`, `nombre`, `enlace`, `img`, `orden`)
 VALUES
-	(1,'Empresas','empresas','logo_empresa'),
-	(2,'Usuarios - Empresa','UsuariosEmpresa','logo_usuarioEmpresa'),
-	(3,'Granjas','granjas','logo_granja'),
-	(4,'Usuarios','usuarios','logo_usuario'),
-	(5,'Galpones','galpones','logo_galpon'),
-	(6,'Insumos','insumos','logo_insumo'),
-	(7,'Insumos a Galpon','insumosGalpon','logo_insumoGalpon');
+	(1,'Empresas','empresas','card_travel',1),
+	(2,'Usuario Principal','UsuariosEmpresa','account_circle',2),
+	(3,'Granjas','granjas','home',3),
+	(4,'Usuarios','usuarios','people',4),
+	(5,'Galpones','galpones','developer_board',5),
+	(6,'Bodega','insumos','dashboard',7),
+	(7,'Insumos a Galpon','insumosGalpon','insert_chart',8),
+	(8,'Reportes','reporte','assignment_returned',9),
+	(9,'Lotes','lotes','loupe',6);
 
-/*!40000 ALTER TABLE `Menu` ENABLE KEYS */;
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla MenuPerfil
+# Volcado de tabla menuperfil
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `MenuPerfil`;
-
-CREATE TABLE `MenuPerfil` (
+CREATE TABLE `menuperfil` (
   `idMenu` int(11) NOT NULL,
   `idPerfil` int(11) NOT NULL,
   KEY `fk_Perfil` (`idPerfil`),
   KEY `fk_Menu` (`idMenu`),
-  CONSTRAINT `fk_Menu` FOREIGN KEY (`idMenu`) REFERENCES `Menu` (`id`),
-  CONSTRAINT `fk_Perfil` FOREIGN KEY (`idPerfil`) REFERENCES `Perfil` (`id`)
+  CONSTRAINT `fk_Menu` FOREIGN KEY (`idMenu`) REFERENCES `menu` (`id`),
+  CONSTRAINT `fk_Perfil` FOREIGN KEY (`idPerfil`) REFERENCES `perfil` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `MenuPerfil` WRITE;
-/*!40000 ALTER TABLE `MenuPerfil` DISABLE KEYS */;
+LOCK TABLES `menuperfil` WRITE;
+/*!40000 ALTER TABLE `menuperfil` DISABLE KEYS */;
 
-INSERT INTO `MenuPerfil` (`idMenu`, `idPerfil`)
+INSERT INTO `menuperfil` (`idMenu`, `idPerfil`)
 VALUES
 	(1,1),
 	(2,1),
 	(3,1),
 	(4,1),
 	(5,1),
+	(3,2),
+	(4,2),
+	(5,2),
+	(6,2),
+	(7,2),
+	(8,3),
 	(6,1),
-	(3,6),
-	(4,6),
-	(5,6),
-	(6,6),
-	(7,1);
+	(7,1),
+	(8,1),
+	(9,1);
 
-/*!40000 ALTER TABLE `MenuPerfil` ENABLE KEYS */;
+/*!40000 ALTER TABLE `menuperfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Pais
+# Volcado de tabla pais
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Pais`;
-
-CREATE TABLE `Pais` (
+CREATE TABLE `pais` (
   `id` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Pais` WRITE;
-/*!40000 ALTER TABLE `Pais` DISABLE KEYS */;
+LOCK TABLES `pais` WRITE;
+/*!40000 ALTER TABLE `pais` DISABLE KEYS */;
 
-INSERT INTO `Pais` (`id`, `nombre`)
+INSERT INTO `pais` (`id`, `nombre`)
 VALUES
 	(57,'Colombia');
 
-/*!40000 ALTER TABLE `Pais` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pais` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla Perfil
+# Volcado de tabla perfil
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Perfil`;
-
-CREATE TABLE `Perfil` (
+CREATE TABLE `perfil` (
   `id` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Perfil` WRITE;
-/*!40000 ALTER TABLE `Perfil` DISABLE KEYS */;
+LOCK TABLES `perfil` WRITE;
+/*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
 
-INSERT INTO `Perfil` (`id`, `nombre`)
+INSERT INTO `perfil` (`id`, `nombre`)
 VALUES
 	(1,'Administrador'),
-	(2,'Veterinario'),
+	(2,'Usuario Principal'),
 	(3,'Galponero'),
-	(4,'Supervisor'),
-	(6,'Usuario Principal');
+	(4,'Veterinario');
 
-/*!40000 ALTER TABLE `Perfil` ENABLE KEYS */;
+/*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla PlanComercial
+# Volcado de tabla plancomercial
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `PlanComercial`;
-
-CREATE TABLE `PlanComercial` (
+CREATE TABLE `plancomercial` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL DEFAULT '',
   `descripcion` text NOT NULL,
@@ -1263,117 +1253,135 @@ CREATE TABLE `PlanComercial` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `PlanComercial` WRITE;
-/*!40000 ALTER TABLE `PlanComercial` DISABLE KEYS */;
+LOCK TABLES `plancomercial` WRITE;
+/*!40000 ALTER TABLE `plancomercial` DISABLE KEYS */;
 
-INSERT INTO `PlanComercial` (`id`, `nombre`, `descripcion`, `valor`)
+INSERT INTO `plancomercial` (`id`, `nombre`, `descripcion`, `valor`)
 VALUES
 	(1,'Free','Versión de prueba  por 7 días',0);
 
-/*!40000 ALTER TABLE `PlanComercial` ENABLE KEYS */;
+/*!40000 ALTER TABLE `plancomercial` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla ProveedorPollo
+# Volcado de tabla proveedor
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `ProveedorPollo`;
-
-CREATE TABLE `ProveedorPollo` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `nit` varchar(45) DEFAULT NULL,
-  `numero` varchar(20) DEFAULT NULL,
-  `contato` varchar(30) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `proveedor` (
+  `nombre` varchar(45) NOT NULL DEFAULT '',
+  `identificacion` int(11) unsigned NOT NULL,
+  `digitoVerificacion` int(11) NOT NULL,
+  `direccion` varchar(45) NOT NULL DEFAULT '',
+  `personaResponsable` varchar(30) NOT NULL DEFAULT '',
+  `numeroResponsable` varchar(20) NOT NULL DEFAULT '',
+  `idEmpresa` int(11) NOT NULL,
+  KEY `fk_empresa_proveedor` (`idEmpresa`),
+  CONSTRAINT `fk_empresa_proveedor` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `proveedor` WRITE;
+/*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
+
+INSERT INTO `proveedor` (`nombre`, `identificacion`, `digitoVerificacion`, `direccion`, `personaResponsable`, `numeroResponsable`, `idEmpresa`)
+VALUES
+	('prueba',11111,2,'cra 80 f','nombre de prueba','22222222',1);
+
+/*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
-# Volcado de tabla TipoCantidad
+# Volcado de tabla tipocantidad
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `TipoCantidad`;
-
-CREATE TABLE `TipoCantidad` (
+CREATE TABLE `tipocantidad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL DEFAULT '',
   `abreviatura` varchar(5) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `TipoCantidad` WRITE;
-/*!40000 ALTER TABLE `TipoCantidad` DISABLE KEYS */;
+LOCK TABLES `tipocantidad` WRITE;
+/*!40000 ALTER TABLE `tipocantidad` DISABLE KEYS */;
 
-INSERT INTO `TipoCantidad` (`id`, `nombre`, `abreviatura`)
+INSERT INTO `tipocantidad` (`id`, `nombre`, `abreviatura`)
 VALUES
-	(1,'Mililitros','ml'),
-	(2,'Litros','l'),
-	(3,'Onzas','oz'),
-	(4,'Libras','lb'),
-	(5,'Kilogramos','kg'),
-	(6,'Toneladas','t');
+	(1,'Kilogramos','Kg'),
+	(2,'Litros','Lt');
 
-/*!40000 ALTER TABLE `TipoCantidad` ENABLE KEYS */;
+/*!40000 ALTER TABLE `tipocantidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla TipoClima
+# Volcado de tabla tipoclima
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `TipoClima`;
-
-CREATE TABLE `TipoClima` (
+CREATE TABLE `tipoclima` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `TipoClima` WRITE;
-/*!40000 ALTER TABLE `TipoClima` DISABLE KEYS */;
+LOCK TABLES `tipoclima` WRITE;
+/*!40000 ALTER TABLE `tipoclima` DISABLE KEYS */;
 
-INSERT INTO `TipoClima` (`id`, `nombre`)
+INSERT INTO `tipoclima` (`id`, `nombre`)
 VALUES
-	(1,'Frio'),
-	(2,'Templado'),
-	(3,'Caliente');
+	(1,'Frio');
 
-/*!40000 ALTER TABLE `TipoClima` ENABLE KEYS */;
+/*!40000 ALTER TABLE `tipoclima` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla TipoDocumento
+# Volcado de tabla tipodocumento
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `TipoDocumento`;
-
-CREATE TABLE `TipoDocumento` (
+CREATE TABLE `tipodocumento` (
   `id` int(11) NOT NULL,
   `abreviatura` varchar(3) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `TipoDocumento` WRITE;
-/*!40000 ALTER TABLE `TipoDocumento` DISABLE KEYS */;
+LOCK TABLES `tipodocumento` WRITE;
+/*!40000 ALTER TABLE `tipodocumento` DISABLE KEYS */;
 
-INSERT INTO `TipoDocumento` (`id`, `abreviatura`, `nombre`)
+INSERT INTO `tipodocumento` (`id`, `abreviatura`, `nombre`)
 VALUES
 	(1,'CC','Cedula de Ciudadania'),
 	(2,'NIT','NIT'),
 	(3,'CE','Cedula deExtranjeria');
 
-/*!40000 ALTER TABLE `TipoDocumento` ENABLE KEYS */;
+/*!40000 ALTER TABLE `tipodocumento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Volcado de tabla TipoPiso
+# Volcado de tabla tipoEmbarque
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `TipoPiso`;
+CREATE TABLE `tipoEmbarque` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(225) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `TipoPiso` (
+LOCK TABLES `tipoEmbarque` WRITE;
+/*!40000 ALTER TABLE `tipoEmbarque` DISABLE KEYS */;
+
+INSERT INTO `tipoEmbarque` (`id`, `nombre`)
+VALUES
+	(1,'Canastilla plastica'),
+	(2,'Canastilla metalica'),
+	(3,'Canastilla carton'),
+	(4,'Canastilla madera');
+
+/*!40000 ALTER TABLE `tipoEmbarque` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Volcado de tabla tipopiso
+# ------------------------------------------------------------
+
+CREATE TABLE `tipopiso` (
   `id` int(11) NOT NULL,
   `nombre` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1381,12 +1389,10 @@ CREATE TABLE `TipoPiso` (
 
 
 
-# Volcado de tabla TipoTecho
+# Volcado de tabla tipotecho
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `TipoTecho`;
-
-CREATE TABLE `TipoTecho` (
+CREATE TABLE `tipotecho` (
   `id` int(11) NOT NULL,
   `nombre` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1394,35 +1400,34 @@ CREATE TABLE `TipoTecho` (
 
 
 
-# Volcado de tabla Usuario
+# Volcado de tabla usuario
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Usuario`;
-
-CREATE TABLE `Usuario` (
+CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contrasena` varchar(45) NOT NULL,
   `ultimoLogin` datetime NOT NULL,
   `intentos` int(11) NOT NULL,
   `idEmpleado` bigint(20) NOT NULL,
   `idPerfil` int(11) NOT NULL,
+  `token` varchar(225) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `fk_Usuario_Empleado1_idx` (`idEmpleado`),
   KEY `fk_Usuario_Perfil1_idx` (`idPerfil`),
-  CONSTRAINT `fk_Usuario_Empleado` FOREIGN KEY (`idEmpleado`) REFERENCES `Empleado` (`identificacion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Usuario_Perfil1` FOREIGN KEY (`idPerfil`) REFERENCES `Perfil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Usuario_Empleado` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`identificacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Usuario_Perfil1` FOREIGN KEY (`idPerfil`) REFERENCES `perfil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `Usuario` WRITE;
-/*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 
-INSERT INTO `Usuario` (`id`, `contrasena`, `ultimoLogin`, `intentos`, `idEmpleado`, `idPerfil`)
+INSERT INTO `usuario` (`id`, `contrasena`, `ultimoLogin`, `intentos`, `idEmpleado`, `idPerfil`, `token`)
 VALUES
-	(1,'admin1','2017-09-19 07:09:07',0,12345,1),
-	(4,'Pass123456789PG1','2017-08-31 08:08:38',0,123456789,1),
-	(5,'Pass1022399551PG','2017-09-17 06:09:52',0,1022399551,1);
+	(1,'21232f297a57a5a743894a0e4a801fc3','2018-03-12 06:03:56',0,1022399551,1,'c2a28a04ad7c1509e0e525ab530d2a12'),
+	(3,'6f2dabcf36293d56be27f7433e47ac7a','0000-00-00 00:00:00',0,765432,2,''),
+	(4,'7a102baf91fde414fcc757ffd5509045','0000-00-00 00:00:00',0,453423412,2,'');
 
-/*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
