@@ -48,7 +48,7 @@
 						<th>Cantidad disponible</th>
 						<th>fechaFinal</th>
 						<th>Granja</th>
-						<th>Editar</th>
+						<th></th>
 					</thead>
 			</table>
 			</div>

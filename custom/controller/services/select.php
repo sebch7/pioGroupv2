@@ -161,7 +161,7 @@
 			*/
 			$arrayUser=array();
 			//consulta los usuarios de una empresa
-		 	$resultado = $db->consulta('Insumo.nombre as nombre,Insumo.fechaInicio as fechaInicio,Insumo.fechaFinal as fechaFinal,Insumo.Cantidad as cantidad,Insumo.fechaCreacion as fechaCreacion,Insumo.cantidadUsada as cantidadUsada,Granja.nombre as granja,Granja.id as idGranja,TipoCantidad.abreviatura as TipoCantidad','Insumo INNER JOIN Granja ON Insumo.idGranja = Granja.id INNER JOIN Empresa ON Empresa.id = Granja.idEmpresa LEFT JOIN TipoCantidad ON TipoCantidad.id = Insumo.idTipoCantidad','1 '.$consultaExtra.'');
+		 	$resultado = $db->consulta('insumo.id as id,Insumo.nombre as nombre,Insumo.fechaInicio as fechaInicio,Insumo.fechaFinal as fechaFinal,Insumo.Cantidad as cantidad, Insumo.cantidadUsada as cantidadUsada, Insumo.fechaCreacion as fechaCreacion,Granja.nombre as granja,Granja.id as idGranja,TipoCantidad.abreviatura as TipoCantidad','Insumo INNER JOIN Granja ON Insumo.idGranja = Granja.id INNER JOIN Empresa ON Empresa.id = Granja.idEmpresa LEFT JOIN TipoCantidad ON TipoCantidad.id = Insumo.idTipoCantidad','insumo.idEstado = 1');
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{
@@ -177,7 +177,7 @@
 			$consultaExtra = '';
 			$arrayUser=array();
 			
-			$resultado = $db->consulta('Insumo.Nombre as insumo,Galpon.nombre as galpon,InsumoGalpon.fechaInicio as fechaInicio,InsumoGalpon.cantidad as cantidad, TipoCantidad.nombre as tipo','InsumoGalpon INNER JOIN Galpon ON InsumoGalpon.idGalpon = Galpon.id INNER JOIN Insumo ON Insumo.id = InsumoGalpon.idInsumo INNER JOIN TipoCantidad ON TipoCantidad.id = Insumo.idTipoCantidad','1 '.$consultaExtra.'');
+			$resultado = $db->consulta('Insumo.Nombre as insumo,Galpon.nombre as galpon,insumoGalpon.fechaInicio as fechaInicio, insumoGalpon.fechaFinal as fechaFinal,Insumo.cantidadUsada as cantidadUsada,"0" as cantidadUsada, insumoGalpon.cantidad as cantidad, TipoCantidad.nombre as tipo','insumoGalpon INNER JOIN Galpon ON insumoGalpon.idGalpon = Galpon.id INNER JOIN Insumo ON Insumo.id = insumoGalpon.idInsumo INNER JOIN TipoCantidad ON TipoCantidad.id = Insumo.idTipoCantidad','1 '.$consultaExtra.'');
 
 			while($_cap=mysqli_fetch_assoc($resultado)) 
 			{

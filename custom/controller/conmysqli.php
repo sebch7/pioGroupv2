@@ -152,7 +152,6 @@ class conmysqli
 				}
 				else
 				{
-					//$token = 'sss';
 					$token = md5($this->generarTtokem());
 					$this->editar('Usuario','intentos = 0,token = "'.$token.'",ultimoLogin = "'.date('Y-m-d h:m:s').'"','idEmpleado = '.$user);
 					$_SESSION['idPerfil'] = $this->resultado['idPerfil'];

@@ -118,7 +118,7 @@ header
 {
 	text-align: left;
 }
-.busqueda
+.busqueda,.deleteForm
 {
 	cursor: pointer !important;
 }

@@ -149,8 +149,8 @@ $('document').ready(function()
 
 	$('#nuevoInsumoGalpon').click(function()
 	{
-		var titulo = ['Galpon','Insumo','cantidad','','Fecha Inicio'];
-		var campo = ['rs_idGalpon','rs_idInsumo','n_cantidad','ls_idTipoCantidad','rd_fechaInicio'];
+		var titulo = ['Galpon','Insumo','cantidad','Medida','Fecha Inicio'];
+		var campo = ['rs_idGalpon','rs_idInsumo','n_cantidad','rs_idTipoCantidad','rd_fechaInicio'];
 		var formulario = 'new_supplyGalpon';
 		$('#container-modal-title').html('<h2>Nuevo Insumo a Galpon</h2>');
 		formNuevo(titulo,campo,formulario);
@@ -909,22 +909,14 @@ $('document').ready(function()
         } );
     	},
 		  "columns": [
-					{"data": "nombre"},
-					{"data": "ciudad", "class": "busqueda"},
-					{"data": "responsable"},
-					{"data": "telefono"},
-		      {"data": "planComercial", "class": "busqueda" },
-		      {"data": "estado", "class": "busqueda" },
+					{"data": "galpon", "class": "busqueda"},
+					{"data": "insumo", "class": "busqueda"},
+					{"data": "cantidad"},
+					{"data": "cantidadUsada"},
+					{"data": "fechaInicio"},
+					{"data": "fechaFinal"},
+		      //{"data": "tipo", "class": "busqueda" },
 		  	],
-		  	
-		  	"columnDefs": [
-        {
-            "targets": 6,
-            "data": "id",
-            "render": function(data) {
-              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
-            },
-        }],
         
 		  	"language": {
 		      "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
@@ -932,22 +924,6 @@ $('document').ready(function()
 		  stateSave: true
 		});
 
-		$('#example tbody').on( 'click', 'span', function () {
-		  var dialog = document.querySelector('dialog');
-			formEditarEmpresa($(this).data('emco'));
-			dialogPolyfill.registerDialog(dialog);
-			dialog.showModal();
-			var showDialogButton = document.querySelector('span');
-			if (dialog.showModal) {
-			  dialogPolyfill.registerDialog(dialog);
-			}
-			showDialogButton.addEventListener('click', function() {
-			  dialog.showModal();
-			});
-			dialog.querySelector('.close').addEventListener('click', function() {
-			  dialog.close();
-			});
-		});
 		/*	
 		idGalpon = 0;
 
@@ -1146,7 +1122,7 @@ $('document').ready(function()
             "targets": 6,
             "data": "id",
             "render": function(data) {
-              return "<span data-emco='"+data+"' class='material-icons editForm'>create</span>";
+              return "<span data-emco='"+data+"' class='material-icons deleteForm'>delete</span>";
             },
         }],
         
@@ -1157,21 +1133,25 @@ $('document').ready(function()
 		});
 
 		$('#example tbody').on( 'click', 'span', function () {
-		  var dialog = document.querySelector('dialog');
-			formEditarEmpresa($(this).data('emco'));
-			dialogPolyfill.registerDialog(dialog);
-			dialog.showModal();
-			var showDialogButton = document.querySelector('span');
-			if (dialog.showModal) {
-			  dialogPolyfill.registerDialog(dialog);
-			}
-			showDialogButton.addEventListener('click', function() {
-			  dialog.showModal();
-			});
-			dialog.querySelector('.close').addEventListener('click', function() {
-			  dialog.close();
-			});
+			desactivarInsumo($(this).data('emco'));
 		});
+	}
+
+	function desactivarInsumo(data)
+	{
+		$.ajax({
+		  method: "POST",
+		  dataType: 'json',
+		  url: "../controller/services/update.php",
+		  data: {accion: 'desactivarInsumo',idInsumo: data}
+		}).done(function(data) {
+			$('#msg').css('display','none');
+		})
+		.fail(function(data) {
+	  })
+	  	.always(function() {
+	    	$('#example').DataTable().ajax.reload();
+	  });
 	}
 
 	function mostrarTablaGalpones(data)
